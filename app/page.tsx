@@ -1,11 +1,10 @@
 "use client";
-
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useEffect, useState } from "react";
-
 
 export default function Home() {
 
@@ -80,7 +79,14 @@ export default function Home() {
             ))}
           </Swiper>
         </section>
+
+        <Footer></Footer>
+        
       </div>
+
+
+      
+
     );
 }
 
