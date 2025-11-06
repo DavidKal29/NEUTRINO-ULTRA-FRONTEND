@@ -52,17 +52,11 @@ export default function Home() {
         {category === 'inicio' ? (
           <><NewProducts products={products}></NewProducts></>) : (<><Products products={products} category={category}></Products></>)
         
-        
-        
-        
         }
 
         <Advantages/>
 
-
-
           
-
         <Footer/>
         
       </div>

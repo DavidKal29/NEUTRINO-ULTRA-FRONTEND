@@ -40,7 +40,7 @@ export default function NewProducts({products}:NewProductsProps) {
                     </div>
 
                     {/* Boton */}
-                    <button className="cursor-pointer mt-4 sm:mt-5 bg-gradient-to-r from-black via-red-700 to-black text-white text-xs sm:text-sm font-semibold py-2 px-5 sm:py-2.5 sm:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">Ver más</button>
+                    <a href={`/product/${product._id}`} className="cursor-pointer mt-4 sm:mt-5 bg-gradient-to-r from-black via-red-700 to-black text-white text-xs sm:text-sm font-semibold py-2 px-5 sm:py-2.5 sm:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">Ver más</a>
                   </div>
                 </div>
               </SwiperSlide>
