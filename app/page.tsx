@@ -6,6 +6,7 @@ import {Product} from './types/product'
 import NewProducts from "./components/NewProducts";
 import Products from "./components/Products";
 import MenuCategories from "./components/MenuCategories";
+import Advantages from "./components/Advantages";
 
 export default function Home() {
 
@@ -48,7 +49,17 @@ export default function Home() {
 
         <MenuCategories categories={categories} category={category} changeCategory={changeCategory} getProducts={getProducts}/>
 
-        {category === 'inicio' ? (<><NewProducts products={products}></NewProducts></>) : (<><Products products={products} category={category}></Products></>)}
+        {category === 'inicio' ? (
+          <><NewProducts products={products}></NewProducts></>) : (<><Products products={products} category={category}></Products></>)
+        
+        
+        
+        
+        }
+
+        <Advantages/>
+
+
 
           
 
