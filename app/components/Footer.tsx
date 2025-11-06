@@ -53,7 +53,7 @@ export default function Footer() {
 
             {/* SERVICIO */}
             <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Mis Datos</h3>
+            <h3 className="text-white font-semibold text-lg mb-4">MIS DATOS</h3>
             <ul className="space-y-2 text-sm">
                 <li><a href="#" className="hover:text-white transition-colors">Mi cuenta</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Carrito</a></li>
