@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Header() {
   return (
-    <header className="w-full bg-[#0a0a0a] text-white text-[0.875rem]">
+    <header className="w-full bg-[#0a0a0a] text-white text-[0.875rem] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)]">
       {/* Arriba */}
       <div className="flex justify-between items-center px-4 py-1.5 border-b border-gray-800 text-white">
         
@@ -64,10 +64,10 @@ export default function Header() {
         <form method="post">
           
           <div className="relative w-full">
-            <input type="text" className="font-bold outline-none p-1.5 max-[360px]:w-[11rem] w-[15rem] min-[560px]:w-[24rem] md:w-[460px] lg:w-[38rem] xl:w-[60rem] h-[34px] xl:h-[44px] text-gray-900 bg-gray-50 rounded-[5px] rounded-r-lg border border-gray-300 text-[11px] max-[320px]:text-[9px] sm:text-[14px]" placeholder="Ordenadores, Tablets, Móviles..." required/>
+            <input type="text" className="font-bold outline-none p-1.5 max-[360px]:w-[11rem] w-[15rem] min-[560px]:w-[24rem] md:w-[460px] lg:w-[38rem] xl:w-[45rem] h-[34px] xl:h-[50px] text-gray-900 bg-gray-50 rounded-[5px] rounded-r-lg border border-gray-300 text-[11px] max-[320px]:text-[9px] sm:text-[14px]" placeholder="Ordenadores, Tablets, Móviles..." required/>
 
             {/* Buscar */}
-            <button type="submit" className="h-[34px] xl:h-[44px] absolute right-0 px-1.5 sm:px-3 bg-[#C40C0C] text-white rounded-r-lg border border-red-700">
+            <button type="submit" className="h-[34px] xl:h-[50px] absolute right-0 px-1.5 sm:px-3 bg-[#C40C0C] text-white rounded-r-lg border border-red-700">
               <i className="fa-solid fa-magnifying-glass text-[1rem] md:text-[1.1rem]"></i>
             </button>
           </div>
