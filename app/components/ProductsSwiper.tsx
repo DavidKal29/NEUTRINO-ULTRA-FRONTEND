@@ -6,10 +6,12 @@ import { Product } from "../types/product";
 
 interface ProductsProps {
   products: Product[],
-  sectionName:string
+  sectionName:string,
+  nuevo:boolean
+
 }
 
-export default function ProductsSwiper({products,sectionName}:ProductsProps) {
+export default function ProductsSwiper({products,sectionName,nuevo}:ProductsProps) {
     
   return (
     <section className="w-full max-w-7xl px-4 sm:px-6 mt-16 relative z-10 my-12">
@@ -23,7 +25,9 @@ export default function ProductsSwiper({products,sectionName}:ProductsProps) {
                 <div className="group relative flex flex-col justify-between items-center text-center rounded-3xl shadow-[0_8px_40px_-10px_rgba(0,0,0,0.15)] bg-white overflow-hidden h-[450px] sm:h-[480px] lg:h-[500px] mx-6 sm:mx-0">
                   
                   {/* Etiqueta NUEVO */}
-                  <div className="absolute top-3 right-3 bg-red-600 text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full z-50">NUEVO</div>
+                  {nuevo && (<>
+                    <div className="absolute top-3 right-3 bg-red-600 text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full z-50">NUEVO</div>
+                  </>)}
 
                   {/* Imagen */}
                   <div className="flex justify-center items-center w-full p-4 sm:p-6 relative h-[55%]">

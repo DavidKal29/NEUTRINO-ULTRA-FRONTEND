@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 import {Product} from './types/product'
-import NewProducts from "./components/ProductsSwiper";
 import Products from "./components/Products";
 import MenuCategories from "./components/MenuCategories";
 import Advantages from "./components/Advantages";
@@ -37,7 +36,7 @@ export default function Home() {
       })
     }
 
-    const getMostPupularProducts = ()=>{
+    const getMostPopularProducts = ()=>{
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/getMostPopularProducts`)
       .then(res=>res.json())
       .then(data=>{
@@ -57,7 +56,7 @@ export default function Home() {
 
     useEffect(()=>{
       getProducts(category)
-      getMostPupularProducts()
+      getMostPopularProducts()
     },[])
 
     return (
@@ -67,13 +66,21 @@ export default function Home() {
         <MenuCategories categories={categories} category={category} changeCategory={changeCategory} getProducts={getProducts}/>
 
         {category === 'inicio' ? (
-          <><ProductsSwiper products={products} sectionName="NUEVOS PRODUCTOS"></ProductsSwiper></>) : (<><Products products={products} category={category}></Products></>)
+          <>
+            <ProductsSwiper products={products} sectionName="NUEVOS PRODUCTOS" nuevo={true}></ProductsSwiper>
+            <Advantages/>
+            <ProductsSwiper products={popularProducts} sectionName="MÁS VENDIDOS" nuevo={false}></ProductsSwiper>
+          
+          </>) : 
+          
+          
+          
+          
+          (<><Products products={products} category={category}></Products></>)
         
         }
 
-        <Advantages/>
-
-        <ProductsSwiper products={popularProducts} sectionName="MÁS VENDIDOS"></ProductsSwiper>
+        
 
 
           
