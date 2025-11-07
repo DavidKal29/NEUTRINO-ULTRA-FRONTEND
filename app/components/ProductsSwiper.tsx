@@ -4,16 +4,17 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { Product } from "../types/product";
 
-interface NewProductsProps {
-  products: Product[];
+interface ProductsProps {
+  products: Product[],
+  sectionName:string
 }
 
-export default function NewProducts({products}:NewProductsProps) {
+export default function ProductsSwiper({products,sectionName}:ProductsProps) {
     
   return (
     <section className="w-full max-w-7xl px-4 sm:px-6 mt-16 relative z-10 my-12">
           <h2 className="text-[28px] sm:text-3xl md:text-5xl font-extrabold mb-10 text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent tracking-tight">
-            NUEVOS PRODUCTOS 
+            {sectionName}
           </h2>
 
           <Swiper modules={[Autoplay]} autoplay={{ delay: 1000, disableOnInteraction: false }} loop={true} spaceBetween={20} slidesPerView={1} breakpoints={{ 640: { slidesPerView: 1, spaceBetween: 25 }, 768: { slidesPerView: 2, spaceBetween: 30 }, 1024: { slidesPerView: 4, spaceBetween: 35 } }} className="pb-16">

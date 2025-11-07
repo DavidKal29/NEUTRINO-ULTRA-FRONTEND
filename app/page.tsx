@@ -3,16 +3,19 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 import {Product} from './types/product'
-import NewProducts from "./components/NewProducts";
+import NewProducts from "./components/ProductsSwiper";
 import Products from "./components/Products";
 import MenuCategories from "./components/MenuCategories";
 import Advantages from "./components/Advantages";
+import ProductsSwiper from "./components/ProductsSwiper";
 
 export default function Home() {
 
     type RequiredProduct = Required<Product>
 
     const [products,setProducts] = useState<RequiredProduct[]>([])
+
+    const [popularProducts,setPopularProducts] = useState<RequiredProduct[]>([])
 
     const [category,setCategory] = useState('inicio')
 
@@ -34,6 +37,19 @@ export default function Home() {
       })
     }
 
+    const getMostPupularProducts = ()=>{
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/getMostPopularProducts`)
+      .then(res=>res.json())
+      .then(data=>{
+        if (data.products) {
+          setPopularProducts(data.products)
+        }else{
+          alert(data.error)
+        }
+      })
+    }
+
+
     useEffect(()=>{
       document.title = 'Home'
     })
@@ -41,6 +57,7 @@ export default function Home() {
 
     useEffect(()=>{
       getProducts(category)
+      getMostPupularProducts()
     },[])
 
     return (
@@ -50,11 +67,14 @@ export default function Home() {
         <MenuCategories categories={categories} category={category} changeCategory={changeCategory} getProducts={getProducts}/>
 
         {category === 'inicio' ? (
-          <><NewProducts products={products}></NewProducts></>) : (<><Products products={products} category={category}></Products></>)
+          <><ProductsSwiper products={products} sectionName="NUEVOS PRODUCTOS"></ProductsSwiper></>) : (<><Products products={products} category={category}></Products></>)
         
         }
 
         <Advantages/>
+
+        <ProductsSwiper products={popularProducts} sectionName="MÁS VENDIDOS"></ProductsSwiper>
+
 
           
         <Footer/>
