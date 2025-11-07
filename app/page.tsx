@@ -7,6 +7,7 @@ import Products from "./components/Products";
 import MenuCategories from "./components/MenuCategories";
 import Advantages from "./components/Advantages";
 import ProductsSwiper from "./components/ProductsSwiper";
+import { toast } from "sonner";
 
 export default function Home() {
 
@@ -31,7 +32,7 @@ export default function Home() {
         if (data.products) {
           setProducts(data.products)
         }else{
-          alert(data.error)
+          toast.error(data.error)
         }
       })
     }
@@ -43,7 +44,7 @@ export default function Home() {
         if (data.products) {
           setPopularProducts(data.products)
         }else{
-          alert(data.error)
+          toast.error(data.error)
         }
       })
     }
@@ -72,19 +73,13 @@ export default function Home() {
             <ProductsSwiper products={popularProducts} sectionName="MÁS VENDIDOS" nuevo={false}></ProductsSwiper>
           
           </>) : 
-          
-          
-          
+           
           
           (<><Products products={products} category={category}></Products></>)
         
         }
 
-        
-
-
-          
-        <Footer/>
+          <Footer/>
         
       </div>
 

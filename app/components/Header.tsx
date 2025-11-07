@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from 'sonner'
 
 export default function Header() {
   const [showPopup,setShowPopup] = useState(false)
@@ -28,13 +29,13 @@ export default function Header() {
         if (data.success) {
           setShowPopup(false)
           setForm({email:'',username:'',password:''})
-          alert(data.success)
+          toast.success(data.success)
 
         } else {
           if (data.message && Array.isArray(data.message)) {
-            alert(data.message[0])
+            toast.error(data.message[0])
           }else{
-            alert(data.error)
+            toast.error(data.error)
           }
         }
       })
