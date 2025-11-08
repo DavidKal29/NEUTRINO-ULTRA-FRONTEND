@@ -3,11 +3,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 import {Product} from './types/product'
+import {User} from './types/user'
 import Products from "./components/Products";
 import MenuCategories from "./components/MenuCategories";
 import Advantages from "./components/Advantages";
 import ProductsSwiper from "./components/ProductsSwiper";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
@@ -20,6 +22,10 @@ export default function Home() {
     const [category,setCategory] = useState('inicio')
 
     const categories = ['inicio','moviles','tablets','portatiles','ordenadores']
+
+    const [user,setUser] = useState<User| null>(null)
+
+    const router = useRouter()
 
     const changeCategory = (c:string)=>{
       setCategory(c)
@@ -49,6 +55,22 @@ export default function Home() {
       })
     }
 
+    const getProfile = () => {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/profile`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success){
+            console.log(data.user);
+            
+            setUser(data.user)
+          }
+        })
+        .catch(() => toast.error('Error al enviar los datos'));
+    };
+
 
     useEffect(()=>{
       document.title = 'Home'
@@ -58,11 +80,12 @@ export default function Home() {
     useEffect(()=>{
       getProducts(category)
       getMostPopularProducts()
+      getProfile()
     },[])
 
     return (
       <div className="flex flex-col justify-start items-center min-h-screen bg-gray-200 relative overflow-hidden">
-        <Header />
+        <Header router={router} user={user} setUser={setUser} getProfile={getProfile} />
 
         <MenuCategories categories={categories} category={category} changeCategory={changeCategory} getProducts={getProducts}/>
 
@@ -79,7 +102,7 @@ export default function Home() {
         
         }
 
-          <Footer/>
+          <Footer router={router} user={user} setUser={setUser} getProfile={getProfile}/>
         
       </div>
 

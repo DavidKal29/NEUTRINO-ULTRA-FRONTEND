@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
 import AuthPopUp from './AuthPopUp'
+import { User } from "../types/user";
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
-export default function Header() {
+
+interface HeaderProps {
+  user:User | null,
+  setUser:(user:User | null)=>void,
+  router:AppRouterInstance,
+  getProfile:()=>void
+}
+
+export default function Header({user,setUser,router,getProfile}:HeaderProps) {
   const [showPopup,setShowPopup] = useState(false)
 
   const [popupView,setPopupView] = useState('login')
+
 
 
   return (
@@ -45,10 +56,23 @@ export default function Header() {
           </div>
 
           {/* Mi Cuenta */}
-          <button onClick={()=>{setShowPopup(true)}} className="flex items-center gap-1 cursor-pointer">
-            <i className="fa-solid fa-user text-red-600 text-[0.9rem]"></i>
-            <span>Mi Cuenta</span>
-          </button>
+          {user ? 
+          
+          (<>
+            <button  className="flex items-center gap-1 cursor-pointer">
+              <i className="fa-solid fa-user text-red-600 text-[0.9rem]"></i>
+              <span>{user?.username}</span>
+            </button>
+          </>) 
+          
+            : 
+          
+          (<>
+            <button onClick={()=>{setShowPopup(true)}} className="flex items-center gap-1 cursor-pointer">
+              <i className="fa-solid fa-user text-red-600 text-[0.9rem]"></i>
+              <span>Mi Cuenta</span>
+            </button>
+          </>)}
           
           {/* Carrito */}
           <a href="/cart" className="max-[360px]:hidden block min-[560px]:hidden text-white text-[18px] duration-[0.5s] hover:text-[#C40C0C]">
@@ -87,7 +111,7 @@ export default function Header() {
 
         {/* PopUp */}
         {showPopup && (
-          <AuthPopUp popupView={popupView} setPopupView={setPopupView} showPopup={showPopup} setShowPopup={setShowPopup}></AuthPopUp>
+          <AuthPopUp user={user} setUser={setUser} getProfile={getProfile} router={router} popupView={popupView} setPopupView={setPopupView} showPopup={showPopup} setShowPopup={setShowPopup}></AuthPopUp>
         )}
       </div>
     </header>

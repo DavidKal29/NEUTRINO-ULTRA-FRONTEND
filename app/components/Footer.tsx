@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
 import AuthPopUp from './AuthPopUp'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
-export default function Footer() {
+interface HeaderProps {
+  user:User | null,
+  setUser:(user:User | null)=>void,
+  router:AppRouterInstance,
+  getProfile:()=>void
+}
+
+export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
 
     const [showPopup,setShowPopup] = useState(false)
     const [popupView,setPopupView] = useState('login')
+
+
 
     return (
         <footer className="bg-black w-full text-gray-300 py-10">
@@ -12,7 +22,7 @@ export default function Footer() {
 
                 {/* PopUp */}
                 {showPopup && (
-                <AuthPopUp popupView={popupView} setPopupView={setPopupView} showPopup={showPopup} setShowPopup={setShowPopup}></AuthPopUp>
+                <AuthPopUp user={user} setUser={setUser} getProfile={getProfile} router={router} popupView={popupView} setPopupView={setPopupView} showPopup={showPopup} setShowPopup={setShowPopup}></AuthPopUp>
                 )}
                 
                 {/* SOBRE NOSOSTROS */}
@@ -65,7 +75,7 @@ export default function Footer() {
                 <div>
                 <h3 className="text-white font-semibold text-lg mb-4">MIS DATOS</h3>
                 <ul className="space-y-2 text-sm">
-                    <li><button onClick={()=>{setShowPopup(true)}} className="cursor-pointer hover:text-white transition-colors">Mi cuenta</button></li>
+                    {user ? (<><li><button className="cursor-pointer hover:text-white transition-colors">{user?.username}</button></li></>) : (<><li><button onClick={()=>{setShowPopup(true)}} className="cursor-pointer hover:text-white transition-colors">Mi cuenta</button></li></>)}
                     <li><a href="#" className="hover:text-white transition-colors">Carrito</a></li>
                     <li><a href="#" className="hover:text-white transition-colors">Sporte técnico</a></li>
                 </ul>

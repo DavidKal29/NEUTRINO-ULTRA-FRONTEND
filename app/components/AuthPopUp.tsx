@@ -1,17 +1,22 @@
 import React from 'react'
 import { toast } from 'sonner'
 import { useState } from 'react'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
 interface AuthProps{
     showPopup:boolean,
     setShowPopup:(showPopup:boolean) =>void,
     popupView:string,
-    setPopupView:(popupView:string)=>void
+    setPopupView:(popupView:string)=>void,
+    router:AppRouterInstance,
+    user:User | null,
+    setUser:(user:User | null)=>void,
+    getProfile:()=>void
 }
 
-export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView}:AuthProps) {
-
-    const [visiblePassword,setVisiblePassword] = useState(false)
+export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView,router,user,setUser,getProfile}:AuthProps) {
+  
+  const [visiblePassword,setVisiblePassword] = useState(false)
   const [form, setForm] = useState({ email: '', username:'', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +40,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
           setShowPopup(false)
           setForm({email:'',username:'',password:''})
           toast.success(data.success)
+          getProfile()
 
         } else {
           if (data.message && Array.isArray(data.message)) {
