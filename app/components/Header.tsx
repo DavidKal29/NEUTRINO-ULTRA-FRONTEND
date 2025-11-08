@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AuthPopUp from './AuthPopUp'
 import { User } from "../types/user";
+import { toast } from 'sonner';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 
@@ -15,6 +16,23 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
   const [showPopup,setShowPopup] = useState(false)
 
   const [popupView,setPopupView] = useState('login')
+
+  const logout = () => {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success){
+            setUser(null)
+            toast.success(data.success)
+          }else{
+            toast.error(data.error)
+          }
+        })
+        .catch(() => toast.error('Error al enviar los datos'));
+  };
 
 
 
@@ -49,11 +67,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
         {/* Mi cuenta */}
         <div className="flex items-center gap-4">
           
-          {/* Divisa */}
-          <div className="flex items-center gap-1">
-            <i className="fa-solid fa-euro-sign text-red-600 text-[0.9rem]"></i>
-            <span>EUR</span>
-          </div>
+          
 
           {/* Mi Cuenta */}
           {user ? 
@@ -63,6 +77,13 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
               <i className="fa-solid fa-user text-red-600 text-[0.9rem]"></i>
               <span>{user?.username}</span>
             </button>
+
+            <button onClick={()=>{logout()}}  className="flex items-center gap-1 cursor-pointer">
+              <i className="fa-solid fa-power-off text-red-600 text-[0.9rem]"></i>
+              <span>Salir</span>
+            </button>
+
+            
           </>) 
           
             : 

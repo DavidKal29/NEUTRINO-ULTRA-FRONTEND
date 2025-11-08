@@ -4,12 +4,15 @@ import Footer from "@/app/components/Footer";
 import { useEffect, useState } from "react";
 import { Product } from "@/app/types/product";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function ProductView() {
   const { id } = useParams();
   const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
+  const [user,setUser] = useState<User| null>(null)
 
+  
   const getProduct = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/getProduct/${id}`)
       .then((res) => res.json())
@@ -22,8 +25,25 @@ export default function ProductView() {
       });
   };
 
+  const getProfile = () => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/profile`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success){
+          console.log(data.user);
+            
+          setUser(data.user)
+        }
+      })
+      .catch(() => toast.error('Error al enviar los datos'));
+  };
+
   useEffect(() => {
     getProduct();
+    getProfile()
   }, []);
 
   useEffect(() => {
@@ -32,7 +52,7 @@ export default function ProductView() {
 
   return (
     <div className="flex flex-col justify-start items-center min-h-screen bg-gray-100 relative overflow-hidden">
-      <Header />
+      <Header router={router} user={user} setUser={setUser} getProfile={getProfile} />
 
       {/* Vista del producto */}
       {product && (
@@ -98,7 +118,7 @@ export default function ProductView() {
         </div>
       )}
 
-      <Footer />
+      <Footer router={router} user={user} setUser={setUser} getProfile={getProfile} />
     </div>
   );
 }
