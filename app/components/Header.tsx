@@ -121,7 +121,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
         </form>
 
         {/* Carrito */}
-        <CartLink></CartLink>
+        <CartLink user={user}></CartLink>
 
 
         {/* PopUp */}

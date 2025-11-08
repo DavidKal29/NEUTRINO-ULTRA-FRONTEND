@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CartItem from '../types/cartItem'
+import User from '../types/user'
+import { toast } from 'sonner'
 
-export default function PopupCart() {
+export default function PopupCart({user}:User) {
 
   const [cart,setCart] = useState<CartItem[] | []>([])
 
@@ -14,6 +16,14 @@ export default function PopupCart() {
     setCart(cartProducts)
 
 
+  }
+
+  const createOrder = ()=>{
+    if (user) {
+      toast.success('Pedido creado con éxito')
+    }else{
+      toast.error('Debes inicar sesión para finalizar el pedido')
+    }
   }
 
   useEffect(()=>{
@@ -46,7 +56,7 @@ export default function PopupCart() {
       </div>
 
       {/* Boton Comprar */}
-      <button className='bg-red-600 text-white p-2 w-full mt-2 rounded text-sm cursor-pointer'>
+      <button onClick={()=>{createOrder()}} className='bg-red-600 text-white p-2 w-full mt-2 rounded text-sm cursor-pointer'>
         Finalizar Pedido
       </button>
 

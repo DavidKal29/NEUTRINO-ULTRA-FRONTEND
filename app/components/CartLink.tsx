@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import {CartItem} from '../types/cartItem'
 import PopupCart from './PopupCart'
+import User from '../types/user'
 
-export default function CartLink() {
+export default function CartLink({user}:User) {
   const [cartCounter, setCartCounter] = useState(0)
 
   const [popupCart,setPopupCart] = useState<boolean | false>(false)
@@ -46,7 +47,7 @@ export default function CartLink() {
 
         {/* Cart Popup */}
         {popupCart && (<>
-            <PopupCart></PopupCart>
+            <PopupCart user={user}></PopupCart>
         </>)}
     
     </button>
