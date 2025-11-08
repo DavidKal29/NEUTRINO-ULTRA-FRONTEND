@@ -15,6 +15,19 @@ export default function PopupCart({user}:User) {
 
     setCart(cartProducts)
 
+  }
+
+  const deleteCartItem = (product:CartItem)=>{
+    const newCart = cart.filter(p=>p._id != product._id)
+
+    setCart(newCart)
+
+    localStorage.setItem('cart',JSON.stringify(newCart))
+
+    //Para disparar evento en localstorage y el contador del carrito actualize reactivamente
+    window.dispatchEvent(new Event('storage'))
+
+    toast.success('Producto eliminado con éxito')
 
   }
 
@@ -51,11 +64,14 @@ export default function PopupCart({user}:User) {
             {/* Info Producto */}
             <div className='flex flex-col justify-start items-start gap-1 flex-1'>
               <span className='text-black font-bold text-sm truncate'>{product.name}</span>
-              <div className='flex justify-start items-center gap-2'>
+              <div className='flex justify-center items-center gap-2'>
                 <p className='text-gray-500 text-sm'>x{product.quantity}</p>
-                <p className='text-red-500 font-semibold text-sm'>{product.totalPrice}€</p>
+                <p className='text-red-500 font-semibold text-sm'>{product.totalPrice.toFixed(2)}€</p>
+                <button onClick={()=>{deleteCartItem(product)}} className='text-red-500 font-bold text-sm cursor-pointer'><i className='fa-solid fa-trash'></i></button>
               </div>
             </div>
+
+            
           
           </div>
         ))}
