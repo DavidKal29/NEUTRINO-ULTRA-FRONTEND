@@ -1,9 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import {CartItem} from '../types/cartItem'
+import PopupCart from './PopupCart'
 
 export default function CartLink() {
   const [cartCounter, setCartCounter] = useState(0)
+  const [popupCart,setPopupCart] = useState<boolean | false>(false)
 
   const getCartitems = () => {
     const setedCart = localStorage.getItem('cart')
@@ -31,9 +33,10 @@ export default function CartLink() {
   }, [])
 
   return (
-    <a href="/cart" className="relative max-[360px]:hidden block min-[560px]:hidden text-white text-[18px] duration-[0.5s] hover:text-[#C40C0C]">
+
+    <button onClick={()=>{setPopupCart(!popupCart)}} className="relative max-[360px]:hidden block min-[560px]:hidden text-white text-[18px] cursor-pointer">
         <i className="fa-solid fa-cart-shopping"></i>
-            
+                
         {/* Contador */}
         {cartCounter > 0 && (
         <div className="absolute -top-3 -right-2 bg-red-600 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center">
@@ -41,6 +44,11 @@ export default function CartLink() {
         </div>
         )}
     
-    </a>
+        {/* Cart Popup */}
+        {popupCart && (<>
+            <PopupCart></PopupCart>
+        </>)}
+        
+    </button>
   )
 }

@@ -1,9 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import {CartItem} from '../types/cartItem'
+import PopupCart from './PopupCart'
 
 export default function PcCartLink() {
   const [cartCounter, setCartCounter] = useState(0)
+
+  const [popupCart,setPopupCart] = useState<boolean | false>(false)
 
   const getCartitems = () => {
     const setedCart = localStorage.getItem('cart')
@@ -31,7 +34,7 @@ export default function PcCartLink() {
   }, [])
 
   return (
-    <a href="/cart" className="relative max-[360px]:block hidden min-[560px]:block text-white text-[18px] lg:text-[26px] duration-[0.5s] hover:text-[#C40C0C]">
+    <button onClick={()=>{setPopupCart(!popupCart)}} className="relative max-[360px]:block hidden min-[560px]:block text-white text-[18px] lg:text-[26px] cursor-pointer">
         <i className="fa-solid fa-cart-shopping"></i>
             
         {/* Contador */}
@@ -40,7 +43,12 @@ export default function PcCartLink() {
             {cartCounter}
         </div>
         )}
+
+        {/* Cart Popup */}
+        {popupCart && (<>
+            <PopupCart></PopupCart>
+        </>)}
     
-    </a>
+    </button>
   )
 }
