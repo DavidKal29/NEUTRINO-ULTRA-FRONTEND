@@ -52,11 +52,25 @@ export default function ProductView() {
   const addCart = ()=>{
     const storedCart = localStorage.getItem('cart')
 
+    if (quantity<1) {
+      toast.error('La cantidad mínima es de un producto')
+      return
+    }
+
+    if (quantity>5) {
+      toast.error('Solo puedes comprar 5 unidades por pedido de un producto')
+      return
+    }
+
     const cart:CartItem[] = storedCart ? JSON.parse(storedCart) : []
 
     const index = cart.findIndex(p=>p._id === product._id)
 
     if (index != -1) {
+      if (cart[index].quantity >= 5) {
+        toast.error('Solo puedes comprar 5 unidades por pedido de un producto')
+        return
+      }
       cart[index].quantity += quantity
       cart[index].totalPrice = (cart[index].quantity * product.price)
     }else{
@@ -129,7 +143,7 @@ export default function ProductView() {
                 value={quantity}
                 className="border border-gray-300 rounded-lg w-16 sm:w-20 text-center py-1.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
               />
-              <button onClick={()=>{addCart()}} className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+              <button onClick={()=>{addCart()}} className="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
                 AÑADIR AL CARRITO
               </button>
             </div>

@@ -19,6 +19,12 @@ export default function PopupCart({user}:User) {
   }
 
   const createOrder = ()=>{
+    if (cart.length === 0) {
+      toast.error('El carrito está vacío')
+      return
+    }
+
+
     if (user) {
       toast.success('Pedido creado con éxito')
     }else{
@@ -54,6 +60,10 @@ export default function PopupCart({user}:User) {
           </div>
         ))}
       </div>
+
+      {cart.length === 0 && (<>
+        <h1 className='text-center font-bold text-black'>CARRITO VACÍO</h1>
+      </>)}
 
       {/* Boton Comprar */}
       <button onClick={()=>{createOrder()}} className='bg-red-600 text-white p-2 w-full mt-2 rounded text-sm cursor-pointer'>
