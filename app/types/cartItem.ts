@@ -1,10 +1,11 @@
-interface Product {
+interface CartItem{
     _id:string
     name:string,
     price:number,
     oldPrice:number,
     image:string,
     brand:String,
-    category:string
-
+    category:string,
+    quantity:number,
+    totalPrice:number
 }

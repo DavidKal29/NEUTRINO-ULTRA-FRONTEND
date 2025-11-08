@@ -1,8 +1,9 @@
 "use client";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Product } from "@/app/types/product";
+import { CartItem } from "@/app/types/cartItem";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -11,6 +12,13 @@ export default function ProductView() {
   const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [user,setUser] = useState<User| null>(null)
+  const [quantity,setQuantity] = useState<number | 1>(1)
+
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const value = parseInt(e.target.value)
+
+    setQuantity(value)
+  }
 
   
   const getProduct = () => {
@@ -40,6 +48,28 @@ export default function ProductView() {
       })
       .catch(() => toast.error('Error al enviar los datos'));
   };
+
+  const addCart = ()=>{
+    const storedCart = localStorage.getItem('cart')
+
+    const cart:CartItem[] = storedCart ? JSON.parse(storedCart) : []
+
+    const index = cart.findIndex(p=>p._id === product._id)
+
+    if (index != -1) {
+      cart[index].quantity += quantity
+      cart[index].totalPrice = (cart[index].quantity * product.price)
+    }else{
+      cart.push({...product,quantity:quantity,totalPrice:quantity * product.price})
+    }
+
+    localStorage.setItem('cart',JSON.stringify(cart))
+
+    toast.success('Añadido al carrito')
+
+    router.push('/')
+
+  }
 
   useEffect(() => {
     getProduct();
@@ -92,10 +122,11 @@ export default function ProductView() {
               <input
                 type="number"
                 min="1"
-                defaultValue="1"
+                onChange={onChange}
+                value={quantity}
                 className="border border-gray-300 rounded-lg w-16 sm:w-20 text-center py-1.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
               />
-              <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+              <button onClick={()=>{addCart()}} className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
                 AÑADIR AL CARRITO
               </button>
             </div>
@@ -103,13 +134,13 @@ export default function ProductView() {
             <div className="flex gap-4 justify-center items-center">
                 {/* Categoría */}
                 <p className="text-xs sm:text-sm text-gray-400 mt-6">
-                CATEGORÍA:{" "}
+                  CATEGORÍA:{" "}
                 <span className="font-semibold text-gray-500">{product.category}</span>
                 </p>
 
                 {/* Marca */}
                 <p className="text-xs sm:text-sm text-gray-400 mt-6">
-                MARCA:{" "}
+                  MARCA:{" "}
                 <span className="font-semibold text-gray-500">{product.brand.toLowerCase()}</span>
                 </p>
             </div>
