@@ -3,6 +3,8 @@ import AuthPopUp from './AuthPopUp'
 import { User } from "../types/user";
 import { toast } from 'sonner';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import CartLink from './CartLink';
+import PcCartLink from './PcCartLink';
 
 
 interface HeaderProps {
@@ -96,9 +98,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
           </>)}
           
           {/* Carrito */}
-          <a href="/cart" className="max-[360px]:hidden block min-[560px]:hidden text-white text-[18px] duration-[0.5s] hover:text-[#C40C0C]">
-            <i className="fa-solid fa-cart-shopping"></i>
-          </a>
+          <CartLink></CartLink>
         
         </div>
       </div>
@@ -125,9 +125,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
         </form>
 
         {/* Carrito */}
-        <a href="/cart" className="max-[360px]:block hidden min-[560px]:block text-white text-[18px] lg:text-[26px] duration-[0.5s] hover:text-[#C40C0C]">
-          <i className="fa-solid fa-cart-shopping"></i>
-        </a>
+        <PcCartLink></PcCartLink>
 
 
         {/* PopUp */}

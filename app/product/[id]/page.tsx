@@ -65,6 +65,9 @@ export default function ProductView() {
 
     localStorage.setItem('cart',JSON.stringify(cart))
 
+    //Para disparar evento en localstorage y el contador del carrito actualize reactivamente
+    window.dispatchEvent(new Event('storage'));
+
     toast.success('Añadido al carrito')
 
     router.push('/')
