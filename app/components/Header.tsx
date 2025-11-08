@@ -4,7 +4,6 @@ import { User } from "../types/user";
 import { toast } from 'sonner';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import CartLink from './CartLink';
-import PcCartLink from './PcCartLink';
 
 
 interface HeaderProps {
@@ -96,9 +95,6 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
               <span>Mi Cuenta</span>
             </button>
           </>)}
-          
-          {/* Carrito */}
-          <CartLink></CartLink>
         
         </div>
       </div>
@@ -125,7 +121,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
         </form>
 
         {/* Carrito */}
-        <PcCartLink></PcCartLink>
+        <CartLink></CartLink>
 
 
         {/* PopUp */}

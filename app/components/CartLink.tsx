@@ -5,6 +5,7 @@ import PopupCart from './PopupCart'
 
 export default function CartLink() {
   const [cartCounter, setCartCounter] = useState(0)
+
   const [popupCart,setPopupCart] = useState<boolean | false>(false)
 
   const getCartitems = () => {
@@ -33,22 +34,21 @@ export default function CartLink() {
   }, [])
 
   return (
-
-    <button onClick={()=>{setPopupCart(!popupCart)}} className="relative max-[360px]:hidden block min-[560px]:hidden text-white text-[18px] cursor-pointer">
+    <button onClick={()=>{setPopupCart(!popupCart)}} className="relative max-[360px]:block min-[560px]:block text-white text-[18px] lg:text-[26px] cursor-pointer">
         <i className="fa-solid fa-cart-shopping"></i>
-                
+            
         {/* Contador */}
         {cartCounter > 0 && (
         <div className="absolute -top-3 -right-2 bg-red-600 text-white text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center">
             {cartCounter}
         </div>
         )}
-    
+
         {/* Cart Popup */}
         {popupCart && (<>
             <PopupCart></PopupCart>
         </>)}
-        
+    
     </button>
   )
 }
