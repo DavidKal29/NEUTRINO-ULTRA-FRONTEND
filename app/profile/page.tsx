@@ -204,11 +204,22 @@ export default function Home() {
       {view === 'misPedidos' && (
         <div className="flex flex-col justify-center items-start w-full p-6 md:p-12">
           <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
-            TODOS MIS PEDIDOS
+            {orders.length>0 ? 'TODOS MIS PEDIDOS' : 'TÚ NO TIENES PEDIDOS'}
           </h2>
 
           {/* TBLA */}
-          <OrdersTable orders={orders}></OrdersTable>
+          {orders.length>0 ? 
+            (<>
+              <OrdersTable orders={orders}></OrdersTable>
+            </>) 
+            : 
+            (<>
+              <div className="flex flex-col justify-center items-start gap-4">
+                <p className="">Antes de visitar esta sección, asegurate de al menos haber comprado un lote de productos, de lo contrario aquí no habrá nada más que espacio en blanco jeje</p>
+                <a href="/" className="rounded px-6 py-2 font-semibold text-white bg-gradient-to-r from-black via-red-500 to-black">Comprar productos</a>
+              </div>
+            </>)
+          }
           
 
 
