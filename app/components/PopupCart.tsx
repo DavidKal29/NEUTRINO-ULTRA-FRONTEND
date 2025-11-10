@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import CartItem from '../types/cartItem'
 import User from '../types/user'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 export default function PopupCart({user}:User) {
 
   const [cart,setCart] = useState<CartItem[] | []>([])
+
+  const router = useRouter()
 
   const getCartItems = ()=>{
     const setedCart = localStorage.getItem('cart')
@@ -39,7 +42,8 @@ export default function PopupCart({user}:User) {
 
 
     if (user) {
-      toast.success('Pedido creado con éxito')
+      router.push('/completePurchase')
+      
     }else{
       toast.error('Debes inicar sesión para finalizar el pedido')
     }
