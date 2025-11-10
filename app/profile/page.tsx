@@ -1,10 +1,12 @@
 "use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { InputEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from '../types/user';
+import {OrderItem} from '../types/orderItem'
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import OrdersTable from "../components/OrdersTable";
 
 export default function Home() {
 
@@ -55,6 +57,8 @@ export default function Home() {
     }).catch(error=>{toast.error('Error al enviar los datos');console.log(error)})
   }
 
+  const [orders,setOrders] = useState<OrderItem[] | []>([])
+
   const getProfile = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/profile`, {
       method: 'GET',
@@ -80,12 +84,31 @@ export default function Home() {
       .catch(() => toast.error('Error al enviar los datos'));
   };
 
+  const getMyOrders = () => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/getMyOrders`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        
+        if (data.success) {
+          setOrders(data.orders)
+        }else{
+          toast.error(data.error)
+        }
+      })
+      .catch(() => toast.error('Error al enviar los datos'));
+  };
+
   useEffect(() => {
     document.title = 'Home';
   }, []);
 
   useEffect(() => {
     getProfile();
+    getMyOrders()
   }, []);
 
   return (
@@ -177,6 +200,22 @@ export default function Home() {
           </form>
         </div>
       )}
+
+      {view === 'misPedidos' && (
+        <div className="flex flex-col justify-center items-start w-full p-6 md:p-12">
+          <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
+            TODOS MIS PEDIDOS
+          </h2>
+
+          {/* TBLA */}
+          <OrdersTable orders={orders}></OrdersTable>
+          
+
+
+
+        </div>
+      )}
+
 
       <Footer router={router} user={user} setUser={setUser} getProfile={getProfile} />
     </div>
