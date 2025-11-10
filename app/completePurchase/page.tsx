@@ -57,11 +57,9 @@ export default function Home() {
 
     e.preventDefault()
 
-    const body = {...form, totalPrice:totalPrice, cart:cart}
+    const body = {...form, totalPrice:totalPrice, cart:cart, metodoPago:metodoPago}
 
     localStorage.clear()
-
-
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/createOrder`, {
       method: 'POST',
@@ -189,7 +187,7 @@ export default function Home() {
                   <p className="font-bold">TOTAL</p>
               </div>
 
-              <div className="flex flex-col justify-center items-center w-full gap-4 max-h-[100px] overflow-hidden overflow-y-auto">
+              <div className="flex flex-col justify-start items-center w-full gap-4 max-h-[100px] overflow-hidden overflow-y-auto">
                 {cart.map((product:CartItem,index:number)=>(
                     <div key={index} className="flex flex-row justify-between w-full items-start gap-12">
                     <p className="text-sm">x{product.quantity}  {product.name}</p>
