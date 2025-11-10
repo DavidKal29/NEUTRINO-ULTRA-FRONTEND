@@ -17,7 +17,7 @@ interface AuthProps{
 export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView,router,user,setUser,getProfile}:AuthProps) {
   
   const [visiblePassword,setVisiblePassword] = useState(false)
-  const [form, setForm] = useState({ email: '', username:'', password: '' });
+  const [form, setForm] = useState({ email: '', username:'', password: '', name:'', lastname:'' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -95,6 +95,28 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                       className="flex-1 h-full outline-none text-black text-sm placeholder-gray-500"
                     />
                   </div>
+
+                  <div className="flex items-center bg-white rounded-xl w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3 border-2 border-gray-500">
+                    <i className="fa-solid fa-user text-gray-500 text-lg mr-2"></i>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Nombre"
+                      onChange={handleChange}
+                      className="flex-1 h-full outline-none text-black text-sm placeholder-gray-500"
+                    />
+                  </div>
+
+                  <div className="flex items-center bg-white rounded-xl w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3 border-2 border-gray-500">
+                    <i className="fa-solid fa-user text-gray-500 text-lg mr-2"></i>
+                    <input
+                      type="text"
+                      name="lastname"
+                      placeholder="Apellido"
+                      onChange={handleChange}
+                      className="flex-1 h-full outline-none text-black text-sm placeholder-gray-500"
+                    />
+                  </div>
                 </>)}
 
                 {(popupView === 'login' || popupView === 'register') && (<>
@@ -121,7 +143,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                 {popupView === 'login' && (<>
                   <p className="text-center text-sm text-gray-500">
                   ¿Olvidaste la contraseña?{' '}
-                    <button onClick={()=>{setPopupView('forgotPassword')}} className="text-red-600 hover:underline cursor-pointer">
+                    <button type='button' onClick={()=>{setPopupView('forgotPassword')}} className="text-red-600 hover:underline cursor-pointer">
                       Recuperar
                     </button>
                   </p>
@@ -130,7 +152,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                 {popupView === 'forgotPassword' && (<>
                   <p className="text-center text-sm text-gray-500">
                   ¿Recordaste la contraseña?{' '}
-                    <button onClick={()=>{setPopupView('login')}} className="text-red-600 hover:underline cursor-pointer">
+                    <button type='button' onClick={()=>{setPopupView('login')}} className="text-red-600 hover:underline cursor-pointer">
                       Iniciar Sesión
                     </button>
                   </p>
@@ -138,6 +160,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                 
 
                 <button
+                  type='submit'
                   className="cursor-pointer w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] bg-red-600 rounded-xl text-white font-bold text-lg transition-transform transform hover:scale-105 hover:bg-red-700 active:scale-95"
                 >
                   {popupView === 'login' ? 'Login' : popupView === 'register' ? 'Register' : 'Send Email'}
@@ -146,7 +169,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                 {popupView === 'login' && (<>
                   <p className="text-center text-sm text-gray-500">
                     ¿No tienes cuenta?{' '}
-                    <button onClick={()=>{setPopupView('register')}} className="cursor-pointer text-red-600 hover:underline">
+                    <button type='button' onClick={()=>{setPopupView('register')}} className="cursor-pointer text-red-600 hover:underline">
                       Crear cuenta
                     </button>
                   </p>
@@ -155,7 +178,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                 {popupView === 'register' && (<>
                   <p className="text-center text-sm text-gray-500">
                     ¿No tienes cuenta?{' '}
-                    <button onClick={()=>{setPopupView('login')}} className="cursor-pointer text-red-600 hover:underline">
+                    <button type='button' onClick={()=>{setPopupView('login')}} className="cursor-pointer text-red-600 hover:underline">
                       Iniciar Sesión
                     </button>
                   </p>
