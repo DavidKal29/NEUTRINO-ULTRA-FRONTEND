@@ -19,21 +19,41 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
   const [popupView,setPopupView] = useState('login')
 
   const logout = () => {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-        method: 'GET',
-        credentials: 'include'
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success){
-            setUser(null)
-            toast.success(data.success)
-          }else{
-            toast.error(data.error)
-          }
-        })
-        .catch(() => toast.error('Error al enviar los datos'));
+    toast("¿Seguro que quieres cerrar sesión?", {
+      action: {
+        label: "Cerrar sesión",
+        onClick: () => {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+            method: 'GET',
+            credentials: 'include',
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+
+              if (data.success) {
+                setUser(null);
+                localStorage.clear();
+                router.push('/');
+              } else {
+                toast.error(data.error);
+                console.log(data.error);
+              }
+            })
+            .catch(error => {
+              console.log('Error al enviar los datos a Logout');
+              console.error(error);
+              toast.error('Error al enviar los datos');
+            });
+        },
+      },
+      cancel: {
+        label: "Cancelar",
+      },
+    });
   };
+
+
 
 
 
@@ -74,12 +94,12 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
           {user ? 
           
           (<>
-            <button  className="flex items-center gap-1 cursor-pointer">
+            <a href='/profile' className="flex items-center gap-1 cursor-pointer">
               <i className="fa-solid fa-user text-red-600 text-[0.9rem]"></i>
               <span>{user?.username}</span>
-            </button>
+            </a>
 
-            <button onClick={()=>{logout()}}  className="flex items-center gap-1 cursor-pointer">
+            <button onClick={()=>{logout()}} className="flex items-center gap-1 cursor-pointer">
               <i className="fa-solid fa-power-off text-red-600 text-[0.9rem]"></i>
               <span>Salir</span>
             </button>
