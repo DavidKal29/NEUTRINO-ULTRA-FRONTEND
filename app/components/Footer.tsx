@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AuthPopUp from './AuthPopUp'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { toast } from 'sonner'
 
 interface HeaderProps {
   user:User | null,
@@ -13,6 +14,41 @@ export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
 
     const [showPopup,setShowPopup] = useState(false)
     const [popupView,setPopupView] = useState('login')
+
+    const logout = () => {
+        toast("¿Seguro que quieres cerrar sesión?", {
+        action: {
+            label: "Cerrar sesión",
+            onClick: () => {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+                method: 'GET',
+                credentials: 'include',
+            })
+                .then(res => res.json())
+                .then(data => {
+                console.log(data);
+
+                if (data.success) {
+                    setUser(null);
+                    localStorage.clear();
+                    router.push('/');
+                } else {
+                    toast.error(data.error);
+                    console.log(data.error);
+                }
+                })
+                .catch(error => {
+                console.log('Error al enviar los datos a Logout');
+                console.error(error);
+                toast.error('Error al enviar los datos');
+                });
+            },
+        },
+        cancel: {
+            label: "Cancelar",
+        },
+        });
+    };
 
 
 
@@ -75,8 +111,16 @@ export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
                 <div>
                 <h3 className="text-white font-semibold text-lg mb-4">MIS DATOS</h3>
                 <ul className="space-y-2 text-sm">
-                    {user ? (<><li><button className="cursor-pointer hover:text-white transition-colors">{user?.username}</button></li></>) : (<><li><button onClick={()=>{setShowPopup(true)}} className="cursor-pointer hover:text-white transition-colors">Mi cuenta</button></li></>)}
-                    <li><a href="#" className="hover:text-white transition-colors">Carrito</a></li>
+                    {user ? 
+                    (<>
+                        <li><a href='/profile' className="cursor-pointer hover:text-white transition-colors">{user?.username}</a></li>
+
+                        <li><button onClick={()=>{logout()}} className="cursor-pointer hover:text-white transition-colors">Cerrar Sesión</button></li>
+                    </>) 
+                    
+                    : 
+                    
+                    (<><li><button onClick={()=>{setShowPopup(true)}} className="cursor-pointer hover:text-white transition-colors">Mi cuenta</button></li></>)}
                     <li><a href="#" className="hover:text-white transition-colors">Sporte técnico</a></li>
                 </ul>
                 </div>

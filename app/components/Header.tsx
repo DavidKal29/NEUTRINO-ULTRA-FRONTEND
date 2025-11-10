@@ -53,10 +53,6 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
     });
   };
 
-
-
-
-
   return (
     <header className="w-full bg-[#0a0a0a] text-white text-[0.875rem] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)]">
       {/* Arriba */}
