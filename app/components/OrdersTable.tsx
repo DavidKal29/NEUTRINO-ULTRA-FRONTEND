@@ -17,6 +17,31 @@ export default function OrdersTable({orders,setOrders,getMyOrders,deleteOrder}:O
         window.dispatchEvent(new Event('storage'))
     }
 
+    const downloadPdf = async (order:OrderItem) => {
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/getPDFOrder`, {
+                method: 'POST',
+                credentials:'include',
+                headers: {'Content-Type': 'application/json',},
+                body: JSON.stringify(order)
+            });
+
+            const blob = await res.blob()
+            const url = window.URL.createObjectURL(blob)
+
+            const a = document.createElement('a')
+            a.href = url;
+            a.download = `pedido_${order._id}.pdf`
+            a.click()
+            window.URL.revokeObjectURL(url)
+
+        } catch (error) {
+            console.log(error);
+            
+            toast.error('No se pudo descargar el PDF')
+        }
+    }
+
     return (
         <div className="overflow-x-auto w-full max-w-[1200px] rounded scrollbar-hide text-white drop-shadow-xl">
             <table className="w-full whitespace-nowrap border-none">
@@ -72,7 +97,7 @@ export default function OrdersTable({orders,setOrders,getMyOrders,deleteOrder}:O
                                 <a href={`/orderDetails/${order._id}`}  target='_blank'>Ver Detalles</a>
                             </td>
                             
-                            <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
+                            <td onClick={()=>{downloadPdf(order)}} className="cursor-pointer px-2 py-3 text-[16px] text-sm font-semibold text-center">
                                 Descargar PDF
                             </td>
 
