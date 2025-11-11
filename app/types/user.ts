@@ -1,5 +1,6 @@
 interface User {
     email:string,
-    username:string
+    username:string,
+    rol:string
 
 }

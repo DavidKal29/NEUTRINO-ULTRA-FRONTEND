@@ -131,7 +131,7 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    document.title = 'Profile';
+    document.title = 'Home';
   }, []);
 
   useEffect(() => {
@@ -150,11 +150,8 @@ export default function Profile() {
 
         <div className="flex justify-center items-center gap-2 text-[15px]">
           <button onClick={() => setView('misDatos')} className={`cursor-pointer ${view === 'misDatos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>MIS DATOS</button>
-          
-          {user?.rol === 'client' && (<>
-            <p>/</p>
-            <button onClick={() => setView('misPedidos')} className={`cursor-pointer ${view === 'misPedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>MIS PEDIDOS</button>
-          </>)}
+          <p>/</p>
+          <button onClick={() => setView('misPedidos')} className={`cursor-pointer ${view === 'misPedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>MIS PEDIDOS</button>
         </div>
       </div>
 
