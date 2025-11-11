@@ -8,7 +8,7 @@ interface ProductsTableProps {
 
 export default function ProductsTable({order}:ProductsTableProps) {
   return (
-    <div className="overflow-x-auto w-full max-w-[1200px] rounded scrollbar-hide text-white drop-shadow-xl">
+    <div className="overflow-x-auto w-full max-w-[1400px] rounded scrollbar-hide text-white drop-shadow-xl">
         <table className="w-full whitespace-nowrap border-none">
             <thead className="text-white bg-[#C40C0C]">
                 <tr>
@@ -47,7 +47,7 @@ export default function ProductsTable({order}:ProductsTableProps) {
                             {product.name}
                         </td>
                         <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                            {product.price}€
+                            {product.price.toFixed(2)}€
                         </td>
                         <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
                             {product.quantity}

@@ -26,7 +26,7 @@ export default function OrdersTable({orders}:OrdersTableProps) {
                     <tr key={index} className="odd:bg-white even:bg-gray-200">
                     <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">{order._id}</td>
                     <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">{new Date(order.createdAt).toLocaleString()}</td>
-                    <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">{order.totalPrice}€</td>
+                    <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">{order.totalPrice.toFixed(2)}€</td>
                     <td className={`px-2 py-1 text-[16px] text-sm font-semibold text-center ${order.status ? 'text-green-500' : 'text-red-600'}`}>{order.status ? <p>Entregado</p> : <p>No Entregado</p>}</td>
                     <td className="cursor-pointer px-2 py-3 text-[16px] text-sm font-semibold text-center">
                         <a href={`/orderDetails/${order._id}`}  target='_blank'>Ver Detalles</a>

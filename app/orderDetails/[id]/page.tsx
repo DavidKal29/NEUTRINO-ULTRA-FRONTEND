@@ -73,8 +73,9 @@ export default function ProductView() {
         <div className="grid grid-cols-1 gap-2">
           <p className="font-semibold text-sm">NÚMERO DE PEDIDO: {order?._id}</p>
           <p className="font-semibold text-sm">FECHA: {new Date(order?.createdAt).toLocaleString()}</p>
-          <p className="font-semibold text-sm">TOTAL: {order?.totalPrice}€</p>
+          <p className="font-semibold text-sm">TOTAL: {order?.totalPrice.toFixed(2)}€</p>
           <p className="font-semibold text-sm">ESTADO: {order?.status ? 'Entregado' : 'No Entregado'}</p>
+          <p className="font-semibold text-sm">MÉTODO DE PAGO: {order?.metodoPago}</p>
         </div>
         
       </div>
