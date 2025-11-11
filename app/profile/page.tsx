@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import OrdersTable from "../components/OrdersTable";
 
-export default function Home() {
+export default function Profile() {
 
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
