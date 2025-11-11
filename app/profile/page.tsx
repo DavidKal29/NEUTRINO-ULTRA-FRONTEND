@@ -102,6 +102,34 @@ export default function Profile() {
       .catch(() => toast.error('Error al enviar los datos'));
   };
 
+  const deleteOrder = (id_order:string) => {
+    toast("¿Seguro que quieres eliminar este pedido?", {
+      action: {
+        label: "Eliminar",
+        onClick: () => {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/deleteOrder/${id_order}`, {
+            method: 'GET',
+            credentials: 'include'
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            if (data.success) {
+              toast.success(data.success)
+              getMyOrders()
+            }else{
+              toast.error(data.error)
+            }
+          })
+          .catch(() => toast.error('Error al enviar los datos'));
+        },
+      },
+      cancel: {
+        label: "Cancelar",
+      },
+    });
+  };
+
   useEffect(() => {
     document.title = 'Home';
   }, []);
@@ -210,7 +238,7 @@ export default function Profile() {
           {/* TBLA */}
           {orders.length>0 ? 
             (<>
-              <OrdersTable orders={orders}></OrdersTable>
+              <OrdersTable orders={orders} setOrders={setOrders} getMyOrders={getMyOrders} deleteOrder={deleteOrder}></OrdersTable>
             </>) 
             : 
             (<>
@@ -221,9 +249,6 @@ export default function Profile() {
             </>)
           }
           
-
-
-
         </div>
       )}
 
