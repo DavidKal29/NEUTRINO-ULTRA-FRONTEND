@@ -136,7 +136,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
           </div>
         </form>
 
-        {user?.rol === 'client' && (<>
+        {(!user || user?.rol === 'client') && (<>
           {/* Carrito */}
           <CartLink user={user}></CartLink>
         </>)}
