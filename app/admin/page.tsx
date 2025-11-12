@@ -4,14 +4,17 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { User } from '../types/user';
 import {OrderItem} from '../types/orderItem'
+import {Product} from '../types/product'
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import AdminOrdersTable from "../components/AdminOrdersTable";
+import AdminProductsTable from "../components/AdminProductsTable";
 
 export default function Profile() {
 
   const [user, setUser] = useState<User | null>(null);
   const [orders,setOrders] = useState<OrderItem[] | []>([])
+  const [products,setProducts] = useState<Product[] | []>([])
   const router = useRouter();
   const [view, setView] = useState<string | 'productos'>('productos');
 
@@ -46,6 +49,24 @@ export default function Profile() {
         
         if (data.success) {
           setOrders(data.orders)
+        }else{
+          toast.error(data.error)
+        }
+      })
+      .catch(() => toast.error('Error al enviar los datos'));
+  };
+
+  const getAllProducts = () => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/getAllProducts`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        
+        if (data.products) {
+          setProducts(data.products)
         }else{
           toast.error(data.error)
         }
@@ -114,6 +135,7 @@ export default function Profile() {
   useEffect(() => {
     getProfile();
     getAllOrders()
+    getAllProducts()
   }, []);
 
   return (
@@ -131,6 +153,30 @@ export default function Profile() {
             <button onClick={() => setView('pedidos')} className={`cursor-pointer ${view === 'pedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PEDIDOS</button>
             </div>
         </div>
+
+        {view === 'productos' && (
+            <div className="flex flex-col justify-center items-start w-full p-6 md:p-12">
+                <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
+                    TODOS LOS PRODUCTOS
+                </h2>
+        
+                {/* TABLA */}
+                {products.length>0 ? 
+                    (<>
+                        <AdminProductsTable products={products}></AdminProductsTable>
+                    </>) 
+                    : 
+                    (<>
+                        <div className="flex flex-col justify-center items-start gap-4">
+                            <p className="">AL parecer, no hay ni un solo producto en la tienda, esto es perjudicial para nosotros como empresa, ya que nadie podrá comprar nada.</p>
+                            <a href="/" className="rounded px-6 py-2 font-semibold text-white bg-gradient-to-r from-black via-red-500 to-black">Volver al Inicio</a>
+                        </div>
+                    </>)
+                }
+                    
+            </div>
+        )}
+
 
 
         {view === 'pedidos' && (
