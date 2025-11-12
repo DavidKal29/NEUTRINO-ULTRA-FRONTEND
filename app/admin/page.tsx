@@ -15,8 +15,6 @@ export default function Profile() {
   const router = useRouter();
   const [view, setView] = useState<string | 'productos'>('productos');
 
-  
- 
   const getProfile = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/profile`, {
       method: 'GET',
@@ -83,7 +81,30 @@ export default function Profile() {
     });
   };
 
+  const downloadPdf = async (orders:OrderItem[]) => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/getPDFOrdersResume`, {
+        method: 'POST',
+        credentials:'include',
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify(orders)
+      });
   
+      const blob = await res.blob()
+      const url = window.URL.createObjectURL(blob)
+  
+      const a = document.createElement('a')
+      a.href = url;
+      a.download = `pedido_${new Date().toLocaleDateString("es-ES")}.pdf`
+      a.click()
+      window.URL.revokeObjectURL(url)
+  
+    } catch (error) {
+      console.log(error);
+      toast.error('No se pudo descargar el PDF')
+    }
+  }
+
   
 
   useEffect(() => {
@@ -117,6 +138,10 @@ export default function Profile() {
                 <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
                     {orders.length>0 ? 'TODOS LOS PEDIDOS' : 'NO HAY PEDIDOS REGISTRADOS'}
                 </h2>
+
+                <button onClick={()=>{downloadPdf(orders)}} className="font-semibold mb-6 cursor-pointer">
+                  Generar resumen de pedidos y ganancias totales <i className="fa-solid fa-file text-red-500"></i>
+                </button>
         
                 {/* TABLA */}
                 {orders.length>0 ? 
