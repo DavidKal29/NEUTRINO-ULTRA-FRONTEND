@@ -31,6 +31,7 @@ export default function Profile() {
           console.log(data.user);
           setUser(data.user);
         }else{
+          
           router.push('/')
           
         }

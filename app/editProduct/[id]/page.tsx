@@ -80,6 +80,7 @@ export default function EditProduct() {
           console.log(data.user);
           setUser(data.user);
         }else{
+          toast.error(data.error)
           router.push('/')
           
         }

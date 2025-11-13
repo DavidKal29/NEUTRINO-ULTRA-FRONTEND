@@ -141,7 +141,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
           <CartLink user={user}></CartLink>
         </>)}
 
-        {user?.rol === 'admin' && (<>
+        {user?.rol.includes('admin') && (<>
           <a href='/admin' className="relative max-[360px]:block min-[560px]:block text-white text-[18px] lg:text-[26px] cursor-pointer">
             <i className="fa-solid fa-gear"></i> 
           </a>
