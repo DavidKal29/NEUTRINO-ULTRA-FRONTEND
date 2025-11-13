@@ -150,7 +150,7 @@ export default function ProductView() {
               </>)}
 
               {user?.rol === 'admin' && (<>
-                <a href="" className="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                <a href={`/editProduct/${product._id}`} className="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
                   EDITAR PRODUCTO
                 </a>
               </>)}

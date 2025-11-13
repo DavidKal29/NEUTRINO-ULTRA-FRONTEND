@@ -6,5 +6,7 @@ interface Product {
     image:string,
     brand:String,
     category:string
+    active:string
+    stock:number
 
 }
