@@ -117,7 +117,7 @@ export default function Profile() {
   
       const a = document.createElement('a')
       a.href = url;
-      a.download = `pedido_${new Date().toLocaleDateString("es-ES")}.pdf`
+      a.download = `resumen_pedidos_${new Date().toLocaleDateString("es-ES")}.pdf`
       a.click()
       window.URL.revokeObjectURL(url)
   

@@ -140,7 +140,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-start items-center min-h-screen bg-white relative overflow-hidden">
+    <div className="flex flex-col justify-start items-center min-h-screen bg-white relative overflow-hidden ">
       <Header router={router} user={user} setUser={setUser} getProfile={getProfile} />
 
       <div className="bg-gray-200 p-4 md:p-8 lg:p-12 flex flex-col justify-center items-start gap-2 drop-shadow-lg w-full">
