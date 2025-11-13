@@ -16,7 +16,7 @@ export default function AdminOrdersTable({orders,setOrders,getMyOrders,deleteOrd
 
     const downloadPdf = async (order:OrderItem) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/getPDFOrder`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/getPDFOrdersResume`, {
                 method: 'POST',
                 credentials:'include',
                 headers: {'Content-Type': 'application/json',},
@@ -28,7 +28,7 @@ export default function AdminOrdersTable({orders,setOrders,getMyOrders,deleteOrd
 
             const a = document.createElement('a')
             a.href = url;
-            a.download = `pedido_${order._id}.pdf`
+            a.download = `detalles_pedidos_${order._id}.pdf`
             a.click()
             window.URL.revokeObjectURL(url)
 
