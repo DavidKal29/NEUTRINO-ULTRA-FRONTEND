@@ -9,12 +9,16 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import AdminOrdersTable from "../components/AdminOrdersTable";
 import AdminProductsTable from "../components/AdminProductsTable";
+import AdminUsersTable from "../components/AdminUsersTable";
 
 export default function Profile() {
 
   const [user, setUser] = useState<User | null>(null);
+  
   const [orders,setOrders] = useState<OrderItem[] | []>([])
+  const [users, setUsers] = useState<User[] | []>([]);
   const [products,setProducts] = useState<Product[] | []>([])
+  
   const router = useRouter();
   const [view, setView] = useState<string | 'productos'>('productos');
 
@@ -31,9 +35,7 @@ export default function Profile() {
           console.log(data.user);
           setUser(data.user);
         }else{
-          
-          router.push('/')
-          
+          router.push('/')     
         }
       })
       .catch(() => toast.error('Error al enviar los datos'));
@@ -68,6 +70,24 @@ export default function Profile() {
         
         if (data.products) {
           setProducts(data.products)
+        }else{
+          toast.error(data.error)
+        }
+      })
+      .catch(() => toast.error('Error al enviar los datos'));
+  };
+
+  const getAllUsers = () => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/getAllUsers`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        
+        if (data.users) {
+          setUsers(data.users)
         }else{
           toast.error(data.error)
         }
@@ -137,6 +157,7 @@ export default function Profile() {
     getProfile();
     getAllOrders()
     getAllProducts()
+    getAllUsers()
   }, []);
 
   return (
@@ -149,10 +170,19 @@ export default function Profile() {
             </h2>
 
             <div className="flex justify-center items-center gap-2 text-[15px]">
-            <button onClick={() => setView('productos')} className={`cursor-pointer ${view === 'productos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PRODUCTOS</button>
-            <p>/</p>
-            <button onClick={() => setView('pedidos')} className={`cursor-pointer ${view === 'pedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PEDIDOS</button>
+              <button onClick={() => setView('productos')} className={`cursor-pointer ${view === 'productos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PRODUCTOS</button>
+              
+              <p>/</p>
+              
+              <button onClick={() => setView('pedidos')} className={`cursor-pointer ${view === 'pedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PEDIDOS</button>
+              
+              {user?.rol === 'superadmin' && (<>
+                <p>/</p>
+                <button onClick={() => setView('usuarios')} className={`cursor-pointer ${view === 'usuarios' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>USUARIOS</button> 
+              </>)}
             </div>
+
+
         </div>
 
         {view === 'productos' && (
@@ -199,6 +229,29 @@ export default function Profile() {
                     (<>
                         <div className="flex flex-col justify-center items-start gap-4">
                             <p className="">AL parecer, ningún usuario ha realizado un solo pedido, esto es perjudicial para nosotros como empresa, ya que eso signfica que no estamos ganando ni un solo céntimo</p>
+                            <a href="/" className="rounded px-6 py-2 font-semibold text-white bg-gradient-to-r from-black via-red-500 to-black">Volver al Inicio</a>
+                        </div>
+                    </>)
+                }
+                    
+            </div>
+        )}
+
+        {view === 'usuarios' && (
+            <div className="flex flex-col justify-center items-start w-full p-6 md:p-12">
+                <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
+                    {users.length>0 ? 'USUARIOS' : 'NO HAY USUARIOS'}
+                </h2>
+        
+                {/* TABLA */}
+                {orders.length>0 ? 
+                    (<>
+                        <AdminUsersTable users={users}></AdminUsersTable>
+                    </>) 
+                    : 
+                    (<>
+                        <div className="flex flex-col justify-center items-start gap-4">
+                            <p className="">AL parecer, no hay ni un solo usuario, esto es perjudicial para nosotros como empresa, ya que eso signfica que no estamos ganando ni un solo céntimo</p>
                             <a href="/" className="rounded px-6 py-2 font-semibold text-white bg-gradient-to-r from-black via-red-500 to-black">Volver al Inicio</a>
                         </div>
                     </>)
