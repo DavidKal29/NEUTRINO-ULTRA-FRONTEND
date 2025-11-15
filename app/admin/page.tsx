@@ -87,6 +87,8 @@ export default function Profile() {
         console.log(data);
         
         if (data.users) {
+          console.log(data.users);
+          
           setUsers(data.users)
         }else{
           toast.error(data.error)
@@ -270,9 +272,13 @@ export default function Profile() {
                 <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
                     {users.length>0 ? 'TODOS LOS USUARIOS' : 'NO HAY USUARIOS'}
                 </h2>
+
+                <a href="/createUser" target="_blank" className="font-semibold mb-6 cursor-pointer">
+                  Crear Nuevo Usuario <i className="fa-solid fa-user-plus text-red-500"></i>
+                </a>
         
                 {/* TABLA */}
-                {orders.length>0 ? 
+                {users.length>0 ? 
                     (<>
                         <AdminUsersTable users={users} setUsers={setUsers} getAllUsers={getAllUsers} deleteUser={deleteUser}></AdminUsersTable>
                     </>) 

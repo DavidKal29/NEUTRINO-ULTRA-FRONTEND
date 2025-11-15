@@ -75,15 +75,15 @@ export default function AdminUsersTable({users,setUsers,getAllUsers,deleteUser}:
                             </td>
 
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                                {user.dni}
+                                {user.dni || 'No tiene'}
                             </td>
 
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                                {user.phone}
+                                {user.phone || 'No tiene'}
                             </td>
 
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                                {user.address}
+                                {user.address || 'No tiene'}
                             </td>
 
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
