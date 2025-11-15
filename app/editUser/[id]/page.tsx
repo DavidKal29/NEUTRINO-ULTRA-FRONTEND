@@ -1,28 +1,18 @@
 "use client";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { useEffect, useState } from "react";
-import { User } from '../types/user';
+import { User } from '../../types/user';
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-export default function Profile() {
+export default function EditUser() {
 
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
-  const [visiblePassword,setVisiblePassword] = useState(false)
+  const {id} = useParams()
 
-  const [form,setForm] = useState({
-    email:'',
-    username:'',
-    name:'',
-    lastname:'',
-    dni:'',
-    phone:'',
-    address:'',
-    rol:'client',
-    password:''
-  })
+  const [form,setForm] = useState<User | {}>({})
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
     setForm({
@@ -35,7 +25,7 @@ export default function Profile() {
 
     e.preventDefault()
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/createUser`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/editUser/${id}`, {
       method: 'POST',
       credentials: 'include',
       headers:{'Content-Type':'application/json'},
@@ -82,14 +72,43 @@ export default function Profile() {
       .catch(() => toast.error('Error al enviar los datos'));
   };
 
+  const getUserData = () => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/getUser/${id}`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          console.log(data.user);
+
+          setForm({
+            _id: data.user._id || '',
+            email: data.user.email || '',
+            username: data.user.username || '',
+            name: data.user.name || '',
+            lastname: data.user.lastname || '',
+            dni: data.user.dni || '',
+            phone: data.user.phone || '',
+            address: data.user.address || '',
+            rol: data.user.rol || ''
+          });
+        }else{
+          router.push('/*')
+        }
+      })
+      .catch(() => toast.error('Error al enviar los datos'));
+  };
+
 
 
   useEffect(() => {
-    document.title = 'Create User';
+    document.title = 'Edit User';
   }, []);
 
   useEffect(() => {
     getProfile();
+    getUserData()
   }, []);
 
   return (
@@ -98,7 +117,7 @@ export default function Profile() {
 
       <div className="flex flex-col justify-center items-start w-full p-6 md:p-12">
         <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
-          CREAR USUARIO NUEVO
+          EDITAR USUARIO NUEVO
         </h2>
         <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
@@ -107,6 +126,7 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
             placeholder="Nombre"
             name="name"
+            value={form.name}
             onChange={handleChange}
           />
           
@@ -115,6 +135,7 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
             placeholder="Apellidos"
             name="lastname"
+            value={form.lastname}
             onChange={handleChange}
           />
           
@@ -123,6 +144,7 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
             placeholder="Correo electrónico"
             name="email"
+            value={form.email}
             onChange={handleChange}
           />
             
@@ -131,6 +153,7 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
             placeholder="Username"
             name="username"
+            value={form.username}
             onChange={handleChange}
           />
           
@@ -139,6 +162,7 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
             placeholder="Domicilio"
             name="address"
+            value={form.address}
             onChange={handleChange}
           />
             
@@ -147,6 +171,7 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
             placeholder="Teléfono"
             name="phone"
+            value={form.phone}
             onChange={handleChange}
           />
           
@@ -155,30 +180,9 @@ export default function Profile() {
             className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"
             placeholder="DNI"
             name="dni"
+            value={form.dni}
             onChange={handleChange}
           />
-
-          <div
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 flex justify-between focus-within:ring-1 focus-within:ring-black focus-within:border-black"
-          >
-            <input
-              type={visiblePassword ? 'text' : 'password'}
-              name="password"
-              autoComplete="off"
-              placeholder="Password"
-              onChange={handleChange}
-              className="outline-none w-full"
-            />
-
-            <button
-              type="button"
-              onClick={() => setVisiblePassword(!visiblePassword)}
-              className="text-gray-500 cursor-pointer ml-2"
-            >
-              <i className={visiblePassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'}></i>
-            </button>
-          </div>
-
 
           <select 
             name="rol" 

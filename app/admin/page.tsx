@@ -273,7 +273,7 @@ export default function Profile() {
                     {users.length>0 ? 'TODOS LOS USUARIOS' : 'NO HAY USUARIOS'}
                 </h2>
 
-                <a href="/createUser" target="_blank" className="font-semibold mb-6 cursor-pointer">
+                <a href="/createUser" className="font-semibold mb-6 cursor-pointer">
                   Crear Nuevo Usuario <i className="fa-solid fa-user-plus text-red-500"></i>
                 </a>
         
