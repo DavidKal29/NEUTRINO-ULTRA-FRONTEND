@@ -123,6 +123,34 @@ export default function Profile() {
     });
   };
 
+  const deleteUser = (id_user:string) => {
+    toast("¿Seguro que quieres eliminar este usuario?", {
+      action: {
+        label: "Eliminar",
+        onClick: () => {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/deleteUser/${id_user}`, {
+            method: 'GET',
+            credentials: 'include'
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            if (data.success) {
+              toast.success(data.success)
+              getAllUsers()
+            }else{
+              toast.error(data.error)
+            }
+          })
+          .catch(() => toast.error('Error al enviar los datos'));
+        },
+      },
+      cancel: {
+        label: "Cancelar",
+      },
+    });
+  };
+
   const downloadPdf = async (orders:OrderItem[]) => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/getPDFOrdersResume`, {
@@ -240,13 +268,13 @@ export default function Profile() {
         {view === 'usuarios' && (
             <div className="flex flex-col justify-center items-start w-full p-6 md:p-12">
                 <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
-                    {users.length>0 ? 'USUARIOS' : 'NO HAY USUARIOS'}
+                    {users.length>0 ? 'TODOS LOS USUARIOS' : 'NO HAY USUARIOS'}
                 </h2>
         
                 {/* TABLA */}
                 {orders.length>0 ? 
                     (<>
-                        <AdminUsersTable users={users}></AdminUsersTable>
+                        <AdminUsersTable users={users} setUsers={setUsers} getAllUsers={getAllUsers} deleteUser={deleteUser}></AdminUsersTable>
                     </>) 
                     : 
                     (<>

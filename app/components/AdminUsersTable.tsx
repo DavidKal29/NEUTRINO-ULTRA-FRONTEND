@@ -3,10 +3,13 @@ import {User} from '../types/user'
 import { toast } from 'sonner'
 
 interface UsersTableProps{
-    users:User[]
+    users:User[],
+    setUsers:(users:User[] | [])=>void,
+    getAllUsers:()=>void,
+    deleteUser:(id_user:string)=>void
 }
 
-export default function AdminUsersTable({users}:UsersTableProps) {
+export default function AdminUsersTable({users,setUsers,getAllUsers,deleteUser}:UsersTableProps) {
 
     return (
         <div className="overflow-x-auto w-full max-w-[1500px] rounded scrollbar-hide text-white drop-shadow-xl">
@@ -90,7 +93,7 @@ export default function AdminUsersTable({users}:UsersTableProps) {
                             </td>
 
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                                <button className='bg-red-500 text-white rounded-full py-3 cursor-pointer px-3 cursor-pointer'>
+                                <button onClick={()=>{deleteUser(user?._id.toString())}} className='bg-red-500 text-white rounded-full py-3 cursor-pointer px-3 cursor-pointer'>
                                     <i className='fa-solid fa-trash'></i>
                                 </button>
                             </td>
