@@ -24,10 +24,22 @@ export default function ProductsSwiper({products,sectionName,nuevo}:ProductsProp
               <SwiperSlide key={index}>
                 <div className="group relative flex flex-col justify-between items-center text-center rounded-3xl shadow-[0_8px_40px_-10px_rgba(0,0,0,0.15)] bg-white overflow-hidden h-[450px] sm:h-[480px] lg:h-[500px] mx-6 sm:mx-0">
                   
-                  {/* Etiqueta NUEVO */}
-                  {nuevo && (<>
-                    <div className="absolute top-3 right-3 bg-red-600 text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full z-50">NUEVO</div>
-                  </>)}
+                  {/* Etiquetas del producto */}
+                  <div className="absolute top-3 right-3 flex gap-1 z-50 items-end">
+
+                    {nuevo && (
+                      <div className="bg-red-600 text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full">
+                        NUEVO
+                      </div>
+                    )}
+
+                    {product?.discount > 0 && (
+                      <div className={`bg-blue-600 text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full`}>
+                        {product?.discount}%
+                      </div>
+                    )}
+
+                  </div>
 
                   {/* Imagen */}
                   <div className="flex justify-center items-center w-full p-4 sm:p-6 relative h-[55%]">
@@ -45,7 +57,19 @@ export default function ProductsSwiper({products,sectionName,nuevo}:ProductsProp
                     </div>
 
                     {/* Boton */}
-                    <a href={`/product/${product._id}`} className="cursor-pointer mt-4 sm:mt-5 bg-gradient-to-r from-black via-red-700 to-black text-white text-xs sm:text-sm font-semibold py-2 px-5 sm:py-2.5 sm:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">Ver más</a>
+                    {product.active === 'on' ? 
+                    
+                      (<>
+                        <a href={`/product/${product._id}`} className="cursor-pointer mt-4 sm:mt-5 bg-gradient-to-r from-black via-red-700 to-black text-white text-xs sm:text-sm font-semibold py-2 px-5 sm:py-2.5 sm:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">Ver más</a>
+                      </>) 
+                      
+                      : 
+                      
+                      (<>
+                        <div className="cursor-pointer mt-4 sm:mt-5 bg-gradient-to-r from-black via-red-700 to-black text-white text-xs sm:text-sm font-semibold py-2 px-5 sm:py-2.5 sm:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">Inactivo</div>
+                      </>)
+                    
+                    }
                   </div>
                 </div>
               </SwiperSlide>

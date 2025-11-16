@@ -125,9 +125,28 @@ export default function ProductView() {
                 {product.price.toFixed(2)}€
               </span>
               {product?.oldPrice && <span className="text-gray-400 line-through text-sm">{product?.oldPrice.toFixed(2)}€</span>}
-              <span className="text-sm sm:text-base text-green-600 font-semibold">
-                EN STOCK
-              </span>
+
+              {product?.stock > 0 ? 
+              (<>
+                <span className="text-sm sm:text-base text-green-600 font-semibold">
+                  EN STOCK
+                </span>
+              </>) 
+              
+              : 
+              
+              (<>
+                <span className="text-sm sm:text-base text-red-600 font-semibold">
+                  SIN STOCK
+                </span>
+              </>)}
+
+              {product?.active === 'off' && (<>
+                <span className="text-sm sm:text-base text-red-600 font-semibold">
+                  INACTIVO
+                </span>
+              </>)}
+              
             </div>
 
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
@@ -136,7 +155,7 @@ export default function ProductView() {
 
             {/* Cantidad + Botón */}
             <div className="flex items-center space-x-3 sm:space-x-4 w-full sm:w-auto">
-              {user?.rol === 'client' && (<>
+              {(user?.rol === 'client' || !user) &&  (<>
                 <input
                   type="number"
                   min="1"
@@ -144,9 +163,23 @@ export default function ProductView() {
                   value={quantity}
                   className="border border-gray-300 rounded-lg w-16 sm:w-20 text-center py-1.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
                 />
-                <button onClick={()=>{addCart()}} className="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                  AÑADIR AL CARRITO
-                </button>
+                {(product?.stock > 0 && product?.active === 'on') ? 
+                
+                (<>
+                  <button onClick={()=>{addCart()}} className="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    AÑADIR AL CARRITO
+                  </button>
+                </>) 
+                
+                : 
+                
+                (<>
+                  <button className="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    NO PUEDES AÑADIR NADA
+                  </button>
+                </>)}
+                
+                
               </>)}
 
               {user?.rol.includes('admin') && (<>
