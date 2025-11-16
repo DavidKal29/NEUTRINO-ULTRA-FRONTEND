@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {OrderItem} from '../types/orderitem'
 import {CartItem} from '../types/cartItem'
 import { toast } from 'sonner'
@@ -13,13 +13,20 @@ interface OrdersTableProps{
 export default function AdminOrdersTable({orders,setOrders,getMyOrders,deleteOrder}:OrdersTableProps) {
 
     const [statusMap,setStatusMap] = useState<Record<string,string | null>>({})
+    const [csrfToken,setCsrfToken] = useState<string | ''>('')
+            
+    const getCsrfToken = ()=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
+          .then(res => res.json())
+          .then(data => setCsrfToken(data.csrfToken))
+    }
 
     const downloadPdf = async (order:OrderItem) => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/getPDFOrder`, {
                 method: 'POST',
                 credentials:'include',
-                headers: {'Content-Type': 'application/json',},
+                headers: {'Content-Type': 'application/json','CSRF-Token':csrfToken},
                 body: JSON.stringify(order)
             });
 
@@ -53,6 +60,11 @@ export default function AdminOrdersTable({orders,setOrders,getMyOrders,deleteOrd
             }
         })
     }
+    
+    useEffect(()=>{
+        getCsrfToken()
+    
+    },[])
 
     return (
         <div className="overflow-x-auto w-full max-w-[1500px] rounded scrollbar-hide text-white drop-shadow-xl">

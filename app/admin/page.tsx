@@ -18,6 +18,14 @@ export default function Profile() {
   const [orders,setOrders] = useState<OrderItem[] | []>([])
   const [users, setUsers] = useState<User[] | []>([]);
   const [products,setProducts] = useState<Product[] | []>([])
+
+  const [csrfToken,setCsrfToken] = useState<string | ''>('')
+                  
+  const getCsrfToken = ()=>{
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
+      .then(res => res.json())
+      .then(data => setCsrfToken(data.csrfToken))
+  }
   
   const router = useRouter();
   const [view, setView] = useState<string | 'productos'>('productos');
@@ -158,7 +166,7 @@ export default function Profile() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/getPDFOrdersResume`, {
         method: 'POST',
         credentials:'include',
-        headers: {'Content-Type': 'application/json',},
+        headers: {'Content-Type': 'application/json','CSRF-Token':csrfToken},
         body: JSON.stringify(orders)
       });
   
@@ -185,6 +193,7 @@ export default function Profile() {
 
   useEffect(() => {
     getProfile();
+    getCsrfToken()
   }, []);
 
   useEffect(()=>{

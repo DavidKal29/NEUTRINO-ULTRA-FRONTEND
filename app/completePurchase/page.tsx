@@ -11,6 +11,14 @@ export default function Home() {
 
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+
+  const [csrfToken,setCsrfToken] = useState<string | ''>('')
+    
+  const getCsrfToken = ()=>{
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
+      .then(res => res.json())
+      .then(data => setCsrfToken(data.csrfToken))
+  }
   
   const [cart,setCart] = useState<CartItem[] | []>([])
 
@@ -64,7 +72,7 @@ export default function Home() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/createOrder`, {
       method: 'POST',
       credentials: 'include',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','CSRF-Token':csrfToken},
       body:JSON.stringify(body)
     })
     .then(res=>res.json())
@@ -114,8 +122,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    getProfile();
+    getProfile()
     getCartItems()
+    getCsrfToken()
   }, []);
 
   return (

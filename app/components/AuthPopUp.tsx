@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { toast } from 'sonner'
 import { useState } from 'react'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
@@ -18,6 +18,13 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
   
   const [visiblePassword,setVisiblePassword] = useState(false)
   const [form, setForm] = useState({ email: '', username:'', password: '', name:'', lastname:'' });
+  const [csrfToken,setCsrfToken] = useState<string | ''>('')
+  
+  const getCsrfToken = ()=>{
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
+      .then(res => res.json())
+      .then(data => setCsrfToken(data.csrfToken))
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,7 +36,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/${popupView}`, {
       method: 'POST',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json','CSRF-Token':csrfToken },
       body: JSON.stringify(form)
     })
       .then(res => res.json())
@@ -52,6 +59,11 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
       })
       .catch(() => alert('Error al enviar los datos'));
   };
+
+  useEffect(()=>{
+    getCsrfToken()
+  },[])
+
   return (
     <div
             className='fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50'

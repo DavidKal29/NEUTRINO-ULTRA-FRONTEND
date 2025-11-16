@@ -12,6 +12,14 @@ export default function ChangePassword() {
   const router = useRouter();
   const [visiblePassword,setVisiblePassword] = useState<boolean | false>(false)
   const [visiblePassword2,setVisiblePassword2] = useState<boolean | false>(false)
+
+  const [csrfToken,setCsrfToken] = useState<string | ''>('')
+          
+  const getCsrfToken = ()=>{
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
+      .then(res => res.json())
+      .then(data => setCsrfToken(data.csrfToken))
+  }
  
   const [form,setForm] = useState({
     new_password:'',
@@ -34,7 +42,7 @@ export default function ChangePassword() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/changePassword/${token}`, {
       method: 'POST',
       credentials: 'include',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','CSRF-Token':csrfToken},
       body:JSON.stringify(form)
     })
     .then(res=>res.json())
@@ -78,6 +86,7 @@ export default function ChangePassword() {
 
   useEffect(() => {
     getProfile();
+    getCsrfToken()
   }, []);
 
   return (
