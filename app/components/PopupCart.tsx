@@ -67,7 +67,7 @@ export default function PopupCart({user}:User) {
             
             {/* Info Producto */}
             <div className='flex flex-col justify-start items-start gap-1 flex-1'>
-              <span className='text-black font-bold text-sm truncate'>{product.name}</span>
+              <a href={`/product/${product._id}`} className='text-black font-bold text-sm truncate'>{product.name}</a>
               <div className='flex justify-center items-center gap-2'>
                 <p className='text-gray-500 text-sm'>x{product.quantity}</p>
                 <p className='text-red-500 font-semibold text-sm'>{product.totalPrice.toFixed(2)}€</p>

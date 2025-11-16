@@ -57,8 +57,8 @@ export default function ProductView() {
       return
     }
 
-    if (quantity>5) {
-      toast.error('Solo puedes comprar 5 unidades por pedido de un producto')
+    if (quantity>product.stock) {
+      toast.error('Esa cantidad supera el stock total del producto, reducela inmediatamente')
       return
     }
 
@@ -67,8 +67,8 @@ export default function ProductView() {
     const index = cart.findIndex(p=>p._id === product._id)
 
     if (index != -1) {
-      if (cart[index].quantity >= 5) {
-        toast.error('Solo puedes comprar 5 unidades por pedido de un producto')
+      if (cart[index].quantity >= product.stock) {
+        toast.error('Esa cantidad supera el stock total del producto, reducela inmediatamente')
         return
       }
       cart[index].quantity += quantity
