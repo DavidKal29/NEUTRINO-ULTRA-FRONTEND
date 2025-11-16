@@ -40,8 +40,8 @@ export default function ProductsSwiper({products,sectionName,nuevo}:ProductsProp
                     <p className="text-base sm:text-lg font-bold w-full text-gray-900">{product?.name}</p>
 
                     <div className="mt-2 sm:mt-3 flex items-center justify-center space-x-2">
-                      <span className="text-red-600 font-extrabold text-lg sm:text-xl">{product?.price}€</span>
-                      {product?.oldPrice && <span className="text-gray-400 line-through text-xs sm:text-sm">{product?.oldPrice}€</span>}
+                      <span className="text-red-600 font-extrabold text-lg sm:text-xl">{product?.price.toFixed(2)}€</span>
+                      {product?.oldPrice && <span className="text-gray-400 line-through text-xs sm:text-sm">{product?.oldPrice.toFixed(2)}€</span>}
                     </div>
 
                     {/* Boton */}

@@ -29,7 +29,8 @@ export default function EditProduct() {
     price:'',
     stock:'',
     brand:'',
-    description:''
+    description:'',
+    discount:''
   })
   
   const router = useRouter();
@@ -107,10 +108,11 @@ export default function EditProduct() {
           setProduct(data.product);
           form.name = data.product?.name
           form.category = data.product?.category
-          form.price = data.product?.price
+          form.price = data.product?.oldPrice
           form.stock = data.product?.stock
           form.brand = data.product?.brand
           form.description = data.product?.description
+          form.discount = data?.product?.discount
         } else {
           router.push("/*");
         }
@@ -184,6 +186,16 @@ export default function EditProduct() {
                     placeholder="Stock del producto"
                     name="stock"
                     value={form.stock}
+                    onChange={handleChange}
+                />
+
+                {/* Discount */}
+                <input
+                    type="number"
+                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+                    placeholder="Descuento del producto"
+                    name="discount"
+                    value={form.discount}
                     onChange={handleChange}
                 />
 

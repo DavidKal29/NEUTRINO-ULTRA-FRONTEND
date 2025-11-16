@@ -122,9 +122,9 @@ export default function ProductView() {
 
             <div className="flex items-center mb-3 flex-wrap gap-3">
               <span className="text-[26px] sm:text-[28px] font-bold text-red-600">
-                {product.price}€
+                {product.price.toFixed(2)}€
               </span>
-              {product?.oldPrice && <span className="text-gray-400 line-through text-sm">{product?.oldPrice}€</span>}
+              {product?.oldPrice && <span className="text-gray-400 line-through text-sm">{product?.oldPrice.toFixed(2)}€</span>}
               <span className="text-sm sm:text-base text-green-600 font-semibold">
                 EN STOCK
               </span>

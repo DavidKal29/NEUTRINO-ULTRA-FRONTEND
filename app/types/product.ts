@@ -8,5 +8,6 @@ interface Product {
     category:string
     active:string
     stock:number
+    discount:number
 
 }

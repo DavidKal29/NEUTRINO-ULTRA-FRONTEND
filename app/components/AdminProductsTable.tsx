@@ -40,6 +40,12 @@ export default function AdminProductsTable({products}:ProductsTableProps) {
                             Precio
                         </th>
                         <th className="px-2 py-1 text-[20px] text-md font-bold text-center">
+                            Descuento
+                        </th>
+                        <th className="px-2 py-1 text-[20px] text-md font-bold text-center">
+                            Precio Rebajado
+                        </th>
+                        <th className="px-2 py-1 text-[20px] text-md font-bold text-center">
                             Stock
                         </th>
                         <th className="px-2 py-1 text-[20px] text-md font-bold text-center">
@@ -73,6 +79,14 @@ export default function AdminProductsTable({products}:ProductsTableProps) {
                             </td>
                             
                             
+                            <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
+                                {product.oldPrice.toFixed(2)}€
+                            </td>
+
+                            <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
+                                {product.discount}%
+                            </td>
+
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
                                 {product.price.toFixed(2)}€
                             </td>
