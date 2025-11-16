@@ -86,7 +86,7 @@ export default function AdminProductsTable({products}:ProductsTableProps) {
                             </td>
 
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                                <a href={`/editProduct/${product?._id}`} target='_blank'>
+                                <a href={`/editProduct/${product?._id}`}>
                                     <i className="fa-solid fa-pen-to-square text-red-600 cursor-pointer text-[25px]"></i>
                                 </a>
                             </td>

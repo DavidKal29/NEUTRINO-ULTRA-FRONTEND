@@ -55,6 +55,7 @@ export default function EditProduct() {
       
       if (data.success) {
         toast.success(data.success)
+        router.push('/admin')
       }else{
         if (data.message && Array.isArray(data.message)) {
           toast.error(data.message[0])

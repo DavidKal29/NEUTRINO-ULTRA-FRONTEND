@@ -1,7 +1,7 @@
 "use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { User } from '../types/user';
 import {OrderItem} from '../types/orderItem'
 import {Product} from '../types/product'
@@ -180,15 +180,26 @@ export default function Profile() {
   
 
   useEffect(() => {
-    document.title = 'Home';
+    document.title = 'Admin Panel';
   }, []);
 
   useEffect(() => {
     getProfile();
-    getAllOrders()
-    getAllProducts()
-    getAllUsers()
   }, []);
+
+  useEffect(()=>{
+    if (view === 'productos') {
+      getAllProducts()
+    }
+    
+    if (view === 'pedidos') {
+      getAllOrders()
+    }
+    
+    if (view === 'usuarios') {
+      getAllUsers()
+    }
+  },[view])
 
   return (
     <div className="flex flex-col justify-start items-center min-h-screen bg-white relative overflow-hidden">
