@@ -11,11 +11,6 @@ interface OrdersTableProps{
 }
 
 export default function OrdersTable({orders,setOrders,getMyOrders,deleteOrder}:OrdersTableProps) {
-    const repeatOrder = (products:CartItem[])=>{
-        localStorage.setItem('cart',JSON.stringify(products))
-        toast.success('Pedido copiado al carrito')
-        window.dispatchEvent(new Event('storage'))
-    }
     const [csrfToken,setCsrfToken] = useState<string | ''>('')
                 
     const getCsrfToken = ()=>{
@@ -78,9 +73,6 @@ export default function OrdersTable({orders,setOrders,getMyOrders,deleteOrder}:O
                             Factura
                         </th>
                         <th className="px-2 py-1 text-[20px] text-md font-bold text-center">
-                            Repetir Pedido
-                        </th>
-                        <th className="px-2 py-1 text-[20px] text-md font-bold text-center">
                             Eliminar
                         </th>
                     </tr>
@@ -111,12 +103,6 @@ export default function OrdersTable({orders,setOrders,getMyOrders,deleteOrder}:O
                             
                             <td onClick={()=>{downloadPdf(order)}} className="cursor-pointer px-2 py-3 text-[16px] text-sm font-semibold text-center">
                                 Descargar PDF
-                            </td>
-
-                            <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">
-                                <button onClick={()=>{repeatOrder(order?.products)}} className='bg-blue-500 text-white rounded-full py-3 cursor-pointer px-3 cursor-pointer'>
-                                    <i className='fa-solid fa-repeat'></i>
-                                </button>
                             </td>
                             
                             <td className="px-2 py-3 text-[16px] text-sm font-semibold text-center">

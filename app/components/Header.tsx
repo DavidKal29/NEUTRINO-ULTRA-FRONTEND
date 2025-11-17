@@ -123,18 +123,27 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
           <img src="/logo.png" alt="Logo" />
         </a>
 
-        {/* Buscador */}
-        <form method="post">
-          
-          <div className="relative w-full">
-            <input type="text" className="font-bold outline-none p-1.5 max-[360px]:w-[11rem] w-[15rem] min-[560px]:w-[24rem] md:w-[460px] lg:w-[38rem] xl:w-[45rem] h-[34px] xl:h-[50px] text-gray-900 bg-gray-50 rounded-[5px] rounded-r-lg border border-gray-300 text-[11px] max-[320px]:text-[9px] sm:text-[14px]" placeholder="Ordenadores, Tablets, Móviles..." required/>
-
-            {/* Buscar */}
-            <button type="submit" className="h-[34px] xl:h-[50px] absolute right-0 px-1.5 sm:px-3 bg-[#C40C0C] text-white rounded-r-lg border border-red-700">
-              <i className="fa-solid fa-magnifying-glass text-[1rem] md:text-[1.1rem]"></i>
-            </button>
+         {/* Nueva sección de etiquetas promocionales para PC */}
+        <div className="hidden lg:flex items-center gap-3 ml-6 flex-wrap">
+          <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white font-bold px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform cursor-pointer flex items-center gap-2">
+            <i className="fa-solid fa-percent"></i> ¡Descuentos hasta 80%!
           </div>
-        </form>
+          
+          <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white font-bold px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform cursor-pointer flex items-center gap-2">
+            <i className="fa-solid fa-star"></i> Nuevos productos
+          </div>
+          <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white font-bold px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform cursor-pointer flex items-center gap-2">
+            <i className="fa-solid fa-clock"></i> Stock Limitado
+          </div>
+          <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white font-bold px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform cursor-pointer flex items-center gap-2">
+            <i className="fa-solid fa-truck-fast"></i> Envío gratis
+          </div>
+          <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white font-bold px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-transform cursor-pointer flex items-center gap-2">
+            <i className="fa-solid fa-gift"></i> Precios de Regalo
+          </div>
+          
+        </div>
+
 
         {(!user || user?.rol === 'client') && (<>
           {/* Carrito */}
