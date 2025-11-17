@@ -67,7 +67,7 @@ export default function ProductView() {
     const index = cart.findIndex(p=>p._id === product._id)
 
     if (index != -1) {
-      if (cart[index].quantity >= product.stock) {
+      if ((cart[index].quantity + quantity) > product.stock) {
         toast.error('Esa cantidad supera el stock total del producto, reducela inmediatamente')
         return
       }
