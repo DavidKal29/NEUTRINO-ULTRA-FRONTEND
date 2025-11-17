@@ -7,13 +7,16 @@ interface HeaderProps {
   user:User | null,
   setUser:(user:User | null)=>void,
   router:AppRouterInstance,
-  getProfile:()=>void
+  getProfile:()=>void,
+  
 }
 
 export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
 
     const [showPopup,setShowPopup] = useState(false)
     const [popupView,setPopupView] = useState('login')
+
+    
 
     const logout = () => {
         toast("¿Seguro que quieres cerrar sesión?", {
@@ -100,10 +103,10 @@ export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
                 <div>
                 <h3 className="text-white font-semibold text-lg mb-4">CATEGORÍAS</h3>
                 <ul className="space-y-2 text-sm">
-                    <li><a href="#" className="hover:text-white transition-colors">Móviles</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Tablets</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Portátiles</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Ordenadores</a></li>
+                    <li><a href="/?category=moviles" className="hover:text-white transition-colors">Móviles</a></li>
+                    <li><a href="/?category=tablets" className="hover:text-white transition-colors">Tablets</a></li>
+                    <li><a href="/?category=portatiles" className="hover:text-white transition-colors">Portátiles</a></li>
+                    <li><a href="/?category=ordenadores" className="hover:text-white transition-colors">Ordenadores</a></li>
                 </ul>
                 </div>
 

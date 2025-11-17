@@ -9,7 +9,7 @@ import MenuCategories from "./components/MenuCategories";
 import Advantages from "./components/Advantages";
 import ProductsSwiper from "./components/ProductsSwiper";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Home() {
 
@@ -19,10 +19,17 @@ export default function Home() {
 
     const [popularProducts,setPopularProducts] = useState<RequiredProduct[]>([])
 
-    const [category,setCategory] = useState('inicio')
+    const searchParams = useSearchParams()
 
     const categories = ['inicio','moviles','tablets','portatiles','ordenadores']
+    
+    const initialCategoryFromQuery = searchParams.get('category') || 'inicio'
 
+    const initialCategory = categories.includes(initialCategoryFromQuery) ? initialCategoryFromQuery : 'inicio'
+
+    const [category, setCategory] = useState(initialCategory)
+
+    
     const [user,setUser] = useState<User| null>(null)
 
     const router = useRouter()
@@ -78,10 +85,19 @@ export default function Home() {
 
 
     useEffect(()=>{
-      getProducts(category)
       getMostPopularProducts()
       getProfile()
     },[])
+
+    useEffect(()=>{
+      getProducts(category)
+
+      //Borrar los parámetros
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete("category")
+      router.replace(`/?${params.toString()}`)
+    
+    },[category])
 
     return (
       <div className="flex flex-col justify-start items-center min-h-screen bg-gray-200 relative overflow-hidden">
