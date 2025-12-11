@@ -155,7 +155,7 @@ export default function EditUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Nombre"
             name="name"
             value={form.name}
@@ -164,7 +164,7 @@ export default function EditUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Apellidos"
             name="lastname"
             value={form.lastname}
@@ -173,7 +173,7 @@ export default function EditUser() {
           
           <input
             type="email"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Correo electrónico"
             name="email"
             value={form.email}
@@ -182,7 +182,7 @@ export default function EditUser() {
             
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Username"
             name="username"
             value={form.username}
@@ -191,7 +191,7 @@ export default function EditUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Domicilio"
             name="address"
             value={form.address}
@@ -200,7 +200,7 @@ export default function EditUser() {
             
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Teléfono"
             name="phone"
             value={form.phone}
@@ -209,7 +209,7 @@ export default function EditUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 text-black placeholder:text-gray-500"
             placeholder="DNI"
             name="dni"
             value={form.dni}
@@ -220,7 +220,7 @@ export default function EditUser() {
             name="rol" 
             onChange={handleChange}
             value={form.rol}
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"> 
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 text-black placeholder:text-gray-500"> 
               <option value="client">Cliente</option>
               <option value="admin">Administrador</option>
               <option value="superadmin">SuperAdministrador</option>

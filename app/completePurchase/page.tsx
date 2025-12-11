@@ -140,11 +140,11 @@ export default function CompletePurchase() {
       <form onSubmit={handleSubmit} className="flex justify-center items-center flex-col md:flex-row md:items-stretch w-full p-4 gap-12 md:px-8 md:py-8 h-full">
         {/* Formulario datos de envio */}
         <div className="w-full flex flex-col justify-center items-start gap-4 h-full max-w-[600px]">
-            <p className="font-bold text-[25px]">DATOS DE ENVÍO</p>
+            <p className="font-bold text-[25px] text-black">DATOS DE ENVÍO</p>
             
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Nombre"
               name="name"
               value={form.name}
@@ -152,7 +152,7 @@ export default function CompletePurchase() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Apellidos"
               name="lastname"
               value={form.lastname}
@@ -161,7 +161,7 @@ export default function CompletePurchase() {
             
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Domicilio"
               name="address"
               value={form.address}
@@ -169,7 +169,7 @@ export default function CompletePurchase() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Teléfono"
               name="phone"
               value={form.phone}
@@ -177,7 +177,7 @@ export default function CompletePurchase() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 text-black placeholder:text-gray-500"
               placeholder="DNI"
               name="dni"
               value={form.dni}

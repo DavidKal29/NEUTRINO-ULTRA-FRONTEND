@@ -153,7 +153,7 @@ export default function EditProduct() {
                 {/* Nombre */}
                 <input
                     type="text"
-                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
                     placeholder="Nombre"
                     name="name"
                     value={form.name}
@@ -162,7 +162,7 @@ export default function EditProduct() {
 
                 {/* Descripción */}
                 <textarea
-                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full resize-none h-32"
+                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full resize-none h-32 text-black placeholder:text-gray-500"
                     placeholder="Descripción"
                     name="description"
                     value={form.description}
@@ -172,7 +172,7 @@ export default function EditProduct() {
                 {/* Precio */}
                 <input
                     type="number"
-                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
                     placeholder="Precio del producto"
                     name="price"
                     value={form.price}
@@ -182,7 +182,7 @@ export default function EditProduct() {
                 {/* Stock */}
                 <input
                     type="number"
-                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
                     placeholder="Stock del producto"
                     name="stock"
                     value={form.stock}
@@ -192,7 +192,7 @@ export default function EditProduct() {
                 {/* Discount */}
                 <input
                     type="number"
-                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+                    className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
                     placeholder="Descuento del producto"
                     name="discount"
                     value={form.discount}
@@ -200,14 +200,14 @@ export default function EditProduct() {
                 />
 
                 {/* Categoría y Marca */}
-                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 w-full">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 w-full text-black placeholder:text-gray-500">
                     <div className="flex flex-col justify-center items-start w-full">
                         <label className="font-medium mb-1">Categoría</label>
                         <select
                             name="category"
                             value={form.category}
                             onChange={handleChange}
-                            className="bg-white rounded border border-gray-300 p-3 drop-shadow w-full"
+                            className="bg-white rounded border border-gray-300 p-3 drop-shadow w-full text-black placeholder:text-gray-500"
                         >
                         {categories.map((c, index) => (
                             <option key={index} value={c}>{c}</option>
@@ -221,7 +221,7 @@ export default function EditProduct() {
                             name="brand"
                             value={form.brand}
                             onChange={handleChange}
-                            className="bg-white rounded border border-gray-300 p-3 drop-shadow.lg w-full"
+                            className="bg-white rounded border border-gray-300 p-3 drop-shadow.lg w-full text-black placeholder:text-gray-500"
                         >
                         {brands.map((b, index) => (
                             <option key={index} value={b}>{b}</option>

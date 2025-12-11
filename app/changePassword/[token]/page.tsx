@@ -98,7 +98,7 @@ export default function ChangePassword() {
           CAMBIAR CONTRASEÑA
         </h2>
 
-        <p>Recuerda utilizar una contraseña segura, que no sea igual a la anterior y que contenga un número, una minúscula, una mayúscula y un carácter especial :)</p>
+        <p className="text-black">Recuerda utilizar una contraseña segura, que no sea igual a la anterior y que contenga un número, una minúscula, una mayúscula y un carácter especial :)</p>
 
         
       </div>
@@ -118,7 +118,7 @@ export default function ChangePassword() {
                     autoComplete="off"
                     placeholder="New Password"
                     onChange={handleChange}
-                    className="outline-none w-full"
+                    className="outline-none w-full text-black placeholder:text-gray-500"
                 />
 
                 <button
@@ -139,7 +139,7 @@ export default function ChangePassword() {
                     autoComplete="off"
                     placeholder="Confirm Password"
                     onChange={handleChange}
-                    className="outline-none w-full"
+                    className="outline-none w-full text-black placeholder:text-gray-500"
                 />
 
                 <button

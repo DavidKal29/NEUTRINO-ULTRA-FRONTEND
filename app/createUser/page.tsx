@@ -113,7 +113,7 @@ export default function CreateUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Nombre"
             name="name"
             onChange={handleChange}
@@ -121,7 +121,7 @@ export default function CreateUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Apellidos"
             name="lastname"
             onChange={handleChange}
@@ -129,7 +129,7 @@ export default function CreateUser() {
           
           <input
             type="email"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Correo electrónico"
             name="email"
             onChange={handleChange}
@@ -137,7 +137,7 @@ export default function CreateUser() {
             
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Username"
             name="username"
             onChange={handleChange}
@@ -145,7 +145,7 @@ export default function CreateUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Domicilio"
             name="address"
             onChange={handleChange}
@@ -153,7 +153,7 @@ export default function CreateUser() {
             
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
             placeholder="Teléfono"
             name="phone"
             onChange={handleChange}
@@ -161,7 +161,7 @@ export default function CreateUser() {
           
           <input
             type="text"
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 text-black placeholder:text-gray-500"
             placeholder="DNI"
             name="dni"
             onChange={handleChange}
@@ -176,7 +176,7 @@ export default function CreateUser() {
               autoComplete="off"
               placeholder="Password"
               onChange={handleChange}
-              className="outline-none w-full"
+              className="outline-none w-full text-black placeholder:text-gray-500"
             />
 
             <button
@@ -193,7 +193,7 @@ export default function CreateUser() {
             name="rol" 
             onChange={handleChange}
             value={form.rol}
-            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"> 
+            className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 text-black placeholder:text-gray-500"> 
               <option value="client">Cliente</option>
               <option value="admin">Administrador</option>
               <option value="superadmin">SuperAdministrador</option>

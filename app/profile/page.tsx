@@ -160,7 +160,7 @@ export default function Profile() {
           <button onClick={() => setView('misDatos')} className={`cursor-pointer ${view === 'misDatos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>MIS DATOS</button>
           
           {user?.rol === 'client' && (<>
-            <p>/</p>
+            <p className="text-gray-600">/</p>
             <button onClick={() => setView('misPedidos')} className={`cursor-pointer ${view === 'misPedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>MIS PEDIDOS</button>
           </>)}
         </div>
@@ -175,7 +175,7 @@ export default function Profile() {
 
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Nombre"
               name="name"
               value={form.name}
@@ -183,7 +183,7 @@ export default function Profile() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Apellidos"
               name="lastname"
               value={form.lastname}
@@ -191,7 +191,7 @@ export default function Profile() {
             />
             <input
               type="email"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Correo electrónico"
               name="email"
               value={form.email}
@@ -199,7 +199,7 @@ export default function Profile() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Username"
               name="username"
               value={form.username}
@@ -207,7 +207,7 @@ export default function Profile() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Domicilio"
               name="address"
               value={form.address}
@@ -215,7 +215,7 @@ export default function Profile() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full text-black placeholder:text-gray-500"
               placeholder="Teléfono"
               name="phone"
               value={form.phone}
@@ -223,7 +223,7 @@ export default function Profile() {
             />
             <input
               type="text"
-              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1"
+              className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 text-black placeholder:text-gray-500"
               placeholder="DNI"
               name="dni"
               value={form.dni}
@@ -254,7 +254,7 @@ export default function Profile() {
             : 
             (<>
               <div className="flex flex-col justify-center items-start gap-4">
-                <p className="">Antes de visitar esta sección, asegurate de al menos haber comprado un lote de productos, de lo contrario aquí no habrá nada más que espacio en blanco jeje</p>
+                <p className="text-black">Antes de visitar esta sección, asegurate de al menos haber comprado un lote de productos, de lo contrario aquí no habrá nada más que espacio en blanco jeje</p>
                 <a href="/" className="rounded px-6 py-2 font-semibold text-white bg-gradient-to-r from-black via-red-500 to-black">Comprar productos</a>
               </div>
             </>)

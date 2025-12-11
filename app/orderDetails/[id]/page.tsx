@@ -69,7 +69,7 @@ export default function OrderDetails() {
           DETALLES DEL PEDIDO
         </h2>
 
-        <div className="grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 gap-2 text-black">
           <p className="font-semibold text-sm">NÚMERO DE PEDIDO: {order?._id}</p>
           <p className="font-semibold text-sm">FECHA: {new Date(order?.createdAt!).toLocaleString()}</p>
           <p className="font-semibold text-sm">TOTAL: {order?.totalPrice.toFixed(2)}€</p>

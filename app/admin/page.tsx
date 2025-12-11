@@ -222,12 +222,12 @@ export default function Admin() {
             <div className="flex justify-center items-center gap-2 text-[15px]">
               <button onClick={() => setView('productos')} className={`cursor-pointer ${view === 'productos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PRODUCTOS</button>
               
-              <p>/</p>
+              <p className="text-gray-600">/</p>
               
               <button onClick={() => setView('pedidos')} className={`cursor-pointer ${view === 'pedidos' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>PEDIDOS</button>
               
               {user?.rol === 'superadmin' && (<>
-                <p>/</p>
+                <p className="text-gray-600">/</p>
                 <button onClick={() => setView('usuarios')} className={`cursor-pointer ${view === 'usuarios' ? 'text-gray-600 font-bold' : 'text-gray-400'}`}>USUARIOS</button> 
               </>)}
             </div>
@@ -249,7 +249,7 @@ export default function Admin() {
                     : 
                     (<>
                         <div className="flex flex-col justify-center items-start gap-4">
-                            <p className="">AL parecer, no hay ni un solo producto en la tienda, esto es perjudicial para nosotros como empresa, ya que nadie podrá comprar nada.</p>
+                            <p className="text-black">AL parecer, no hay ni un solo producto en la tienda, esto es perjudicial para nosotros como empresa, ya que nadie podrá comprar nada.</p>
                             <a href="/" className="rounded px-6 py-2 font-semibold text-white bg-gradient-to-r from-black via-red-500 to-black">Volver al Inicio</a>
                         </div>
                     </>)
@@ -266,7 +266,7 @@ export default function Admin() {
                     {orders.length>0 ? 'TODOS LOS PEDIDOS' : 'NO HAY PEDIDOS REGISTRADOS'}
                 </h2>
 
-                <button onClick={()=>{downloadPdf(orders)}} className="font-semibold mb-6 cursor-pointer">
+                <button onClick={()=>{downloadPdf(orders)}} className="font-semibold mb-6 cursor-pointer text-black">
                   Generar resumen de pedidos y ganancias totales <i className="fa-solid fa-file text-red-500"></i>
                 </button>
         
@@ -293,7 +293,7 @@ export default function Admin() {
                     {users.length>0 ? 'TODOS LOS USUARIOS' : 'NO HAY USUARIOS'}
                 </h2>
 
-                <a href="/createUser" className="font-semibold mb-6 cursor-pointer">
+                <a href="/createUser" className="font-semibold mb-6 cursor-pointer text-black">
                   Crear Nuevo Usuario <i className="fa-solid fa-user-plus text-red-500"></i>
                 </a>
         
