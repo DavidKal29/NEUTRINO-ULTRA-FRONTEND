@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {OrderItem} from '../types/orderitem'
+import {OrderItem} from '../types/orderItem'
 import {CartItem} from '../types/cartItem'
 import { toast } from 'sonner'
 

@@ -50,7 +50,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
       cancel: {
         label: "Cancelar",
       },
-    });
+    } as any);
   };
 
   return (

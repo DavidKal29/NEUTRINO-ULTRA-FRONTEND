@@ -6,6 +6,19 @@ import { User } from '../../types/user';
 import { toast } from "sonner";
 import { useParams, useRouter } from "next/navigation";
 
+interface EditUserForm {
+  _id?: string;
+  email: string;
+  username: string;
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string;
+  address: string;
+  rol: string;
+}
+
+
 export default function EditUser() {
 
   const [user, setUser] = useState<User | null>(null);
@@ -20,7 +33,17 @@ export default function EditUser() {
       .then(data => setCsrfToken(data.csrfToken))
   }
 
-  const [form,setForm] = useState<User | {}>({})
+  const [form,setForm] = useState<EditUserForm>({
+    _id: "",
+    email: "",
+    username: "",
+    name: "",
+    lastname: "",
+    dni: "",
+    phone: "",
+    address: "",
+    rol: "client",
+  })
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
     setForm({

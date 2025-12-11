@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {OrderItem} from '../types/orderitem'
+import {OrderItem} from '../types/orderItem'
 import {CartItem} from '../types/cartItem'
 import { toast } from 'sonner'
 
@@ -121,7 +121,7 @@ export default function AdminOrdersTable({orders,setOrders,getMyOrders,deleteOrd
                                 <div className="flex justify-center items-center gap-2">
                                     <select 
                                         className="px-4 py-1 border rounded" 
-                                        value={statusMap[order._id] || order?.status}
+                                        value={(statusMap as any)[order._id] || order?.status}
                                         onChange={(e)=>{
                                             setStatusMap((prev)=>({
                                                 ...prev,
@@ -135,7 +135,7 @@ export default function AdminOrdersTable({orders,setOrders,getMyOrders,deleteOrd
                                     </select>
 
                                     <button 
-                                    onClick={()=>{changeOrderStatus(order?._id,statusMap[order._id] || order?.status)}}
+                                    onClick={()=>{changeOrderStatus(order?._id,(statusMap as any)[order._id] || order?.status)}}
                                     className="cursor-pointer text-center bg-gradient-to-r from-red-500 to-red-800 text-white font-semibold rounded px-4 py-1">
                                         Guardar
                                     </button>

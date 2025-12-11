@@ -1,6 +1,6 @@
 import {CartItem} from './cartItem'
 
-interface OrderItem{
+export interface OrderItem{
     _id:string,
     id_user:string,
     products:CartItem[],
@@ -8,5 +8,6 @@ interface OrderItem{
     address:string,
     createdAt:string,
     metodoPago:string,
-    status:boolean
+    status:string,
+    username:string
 }

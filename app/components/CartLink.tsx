@@ -2,9 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import {CartItem} from '../types/cartItem'
 import PopupCart from './PopupCart'
-import User from '../types/user'
+import {User} from '../types/user'
 
-export default function CartLink({user}:User) {
+interface CartLinkProps{
+  user:User | null
+}
+
+export default function CartLink({user}:CartLinkProps) {
   const [cartCounter, setCartCounter] = useState(0)
 
   const [popupCart,setPopupCart] = useState<boolean | false>(false)

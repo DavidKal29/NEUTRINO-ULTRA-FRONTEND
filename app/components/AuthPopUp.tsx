@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { toast } from 'sonner'
 import { useState } from 'react'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import {User} from '../types/user'
 
 interface AuthProps{
     showPopup:boolean,
@@ -45,7 +46,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
         
         if (data.success) {
           setShowPopup(false)
-          setForm({email:'',username:'',password:''})
+          setForm({email:'',username:'',password:'',name:'',lastname:''})
           toast.success(data.success)
           getProfile()
 

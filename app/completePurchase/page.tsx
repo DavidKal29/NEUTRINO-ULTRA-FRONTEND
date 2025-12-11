@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { User } from '../types/user';
-import CartItem from '../types/cartItem'
+import {CartItem} from '../types/cartItem'
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

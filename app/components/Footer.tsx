@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AuthPopUp from './AuthPopUp'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { toast } from 'sonner'
+import {User} from '../types/user'
 
 interface HeaderProps {
   user:User | null,
@@ -50,7 +51,7 @@ export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
         cancel: {
             label: "Cancelar",
         },
-        });
+        } as any);
     };
 
 

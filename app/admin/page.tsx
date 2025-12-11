@@ -130,7 +130,7 @@ export default function Admin() {
       cancel: {
         label: "Cancelar",
       },
-    });
+    }as any);
   };
 
   const deleteUser = (id_user:string) => {
@@ -158,7 +158,7 @@ export default function Admin() {
       cancel: {
         label: "Cancelar",
       },
-    });
+    }as any);
   };
 
   const downloadPdf = async (orders:OrderItem[]) => {

@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
     _id:string
     name:string,
     price:number,
@@ -8,6 +8,8 @@ interface Product {
     category:string
     active:string
     stock:number
-    discount:number
+    discount:number,
+    sales:number,
+    description:string
 
 }

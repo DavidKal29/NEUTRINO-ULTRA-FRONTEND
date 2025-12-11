@@ -1,9 +1,9 @@
 import React from "react";
 import {CartItem} from '../types/cartItem'
-import {Orderitem} from '../types/orderItem'
+import {OrderItem} from '../types/orderItem'
 
 interface ProductsTableProps {
-    order:Orderitem
+    order:OrderItem | null
 }
 
 export default function ProductsTable({order}:ProductsTableProps) {

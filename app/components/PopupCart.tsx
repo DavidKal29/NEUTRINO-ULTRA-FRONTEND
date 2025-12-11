@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import CartItem from '../types/cartItem'
-import User from '../types/user'
+import {CartItem} from '../types/cartItem'
+import {User} from '../types/user'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
-export default function PopupCart({user}:User) {
+interface PopUpCartProps{
+  user: User | null
+}
+
+export default function PopupCart({user}:PopUpCartProps) {
 
   const [cart,setCart] = useState<CartItem[] | []>([])
 

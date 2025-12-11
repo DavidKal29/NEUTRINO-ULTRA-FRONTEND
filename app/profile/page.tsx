@@ -134,7 +134,7 @@ export default function Profile() {
       cancel: {
         label: "Cancelar",
       },
-    });
+    } as any);
   };
 
   useEffect(() => {

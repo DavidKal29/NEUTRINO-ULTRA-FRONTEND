@@ -2,10 +2,11 @@
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import React, { useEffect, useState } from "react";
-import { Product } from "@/app/types/product";
+import {Product} from '../../types/product'
 import { CartItem } from "@/app/types/cartItem";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import {User} from '../../types/user'
 
 export default function ProductView() {
   const { id } = useParams();
@@ -50,41 +51,43 @@ export default function ProductView() {
   };
 
   const addCart = ()=>{
-    const storedCart = localStorage.getItem('cart')
+    if (product) {
+      const storedCart = localStorage.getItem('cart')
 
-    if (quantity<1) {
-      toast.error('La cantidad mínima es de un producto')
-      return
-    }
+      if (quantity<1) {
+        toast.error('La cantidad mínima es de un producto')
+        return
+      }
 
-    if (quantity>product.stock) {
-      toast.error('Esa cantidad supera el stock total del producto, reducela inmediatamente')
-      return
-    }
-
-    const cart:CartItem[] = storedCart ? JSON.parse(storedCart) : []
-
-    const index = cart.findIndex(p=>p._id === product._id)
-
-    if (index != -1) {
-      if ((cart[index].quantity + quantity) > product.stock) {
+      if (quantity>product.stock) {
         toast.error('Esa cantidad supera el stock total del producto, reducela inmediatamente')
         return
       }
-      cart[index].quantity += quantity
-      cart[index].totalPrice = (cart[index].quantity * product.price)
-    }else{
-      cart.push({...product,quantity:quantity,totalPrice:quantity * product.price})
+
+      const cart:CartItem[] = storedCart ? JSON.parse(storedCart) : []
+
+      const index = cart.findIndex(p=>p._id === product._id)
+
+      if (index != -1) {
+        if ((cart[index].quantity + quantity) > product.stock) {
+          toast.error('Esa cantidad supera el stock total del producto, reducela inmediatamente')
+          return
+        }
+        cart[index].quantity += quantity
+        cart[index].totalPrice = (cart[index].quantity * product.price)
+      }else{
+        cart.push({...product,quantity:quantity,totalPrice:quantity * product.price})
+      }
+
+      localStorage.setItem('cart',JSON.stringify(cart))
+
+      //Para disparar evento en localstorage y el contador del carrito actualize reactivamente
+      window.dispatchEvent(new Event('storage'));
+
+      toast.success('Añadido al carrito')
+
+      router.push('/')
     }
-
-    localStorage.setItem('cart',JSON.stringify(cart))
-
-    //Para disparar evento en localstorage y el contador del carrito actualize reactivamente
-    window.dispatchEvent(new Event('storage'));
-
-    toast.success('Añadido al carrito')
-
-    router.push('/')
 
   }
 
