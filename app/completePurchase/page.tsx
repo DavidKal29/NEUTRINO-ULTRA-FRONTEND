@@ -7,7 +7,7 @@ import CartItem from '../types/cartItem'
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function CompletePurchase() {
 
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
@@ -118,7 +118,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    document.title = 'Home';
+    document.title = 'Complete Purchase';
   }, []);
 
   useEffect(() => {

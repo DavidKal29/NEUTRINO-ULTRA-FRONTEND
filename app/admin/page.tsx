@@ -11,7 +11,7 @@ import AdminOrdersTable from "../components/AdminOrdersTable";
 import AdminProductsTable from "../components/AdminProductsTable";
 import AdminUsersTable from "../components/AdminUsersTable";
 
-export default function Profile() {
+export default function Admin() {
 
   const [user, setUser] = useState<User | null>(null);
   

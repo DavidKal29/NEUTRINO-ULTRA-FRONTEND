@@ -6,7 +6,7 @@ import { User } from '../types/user';
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function Profile() {
+export default function CreateUser() {
 
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();

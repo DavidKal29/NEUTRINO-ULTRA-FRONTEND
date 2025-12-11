@@ -8,7 +8,7 @@ import {User} from '../../types/user'
 import {OrderItem} from '../../types/orderItem'
 import ProductsTable from "@/app/components/ProductsTable";
 
-export default function ProductView() {
+export default function OrderDetails() {
   const router = useRouter();
   const [user,setUser] = useState<User | null>(null)
   const [order,setOrder] = useState<OrderItem | null>(null)
