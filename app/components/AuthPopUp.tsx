@@ -58,7 +58,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
           }
         }
       })
-      .catch(() => alert('Error al enviar los datos'));
+      .catch(() => toast.error('Error al enviar los datos'));
   };
 
   useEffect(()=>{
