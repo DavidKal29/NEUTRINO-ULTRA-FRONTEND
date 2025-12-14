@@ -74,11 +74,11 @@ export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
                 <ul className="space-y-2 text-sm">
                     <li className="flex items-center gap-2">
                     <span className="text-red-500">📍</span>
-                        C/ Ortega, 31, Valencia
+                        Calle Valero 31
                     </li>
                     <li className="flex items-center gap-2">
                     <span className="text-red-500">📞</span>
-                        969 696 969
+                        989 89 78 98
                     </li>
                     <li className="flex items-center gap-2">
                     <span className="text-red-500">✉️</span>
@@ -124,7 +124,7 @@ export default function Footer({user,setUser,router,getProfile}:HeaderProps) {
                     
                     : 
                     
-                    (<><li><button onClick={()=>{setShowPopup(true)}} className="cursor-pointer hover:text-white transition-colors">Mi cuenta</button></li></>)}
+                    (<><li><button onClick={()=>{setShowPopup(true)}} className="cursor-pointer hover:text-white transition-colors">Login</button></li></>)}
                     <li><a href="#" className="hover:text-white transition-colors">Sporte técnico</a></li>
                 </ul>
                 </div>

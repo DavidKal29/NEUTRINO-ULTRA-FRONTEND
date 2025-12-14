@@ -61,22 +61,22 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
         {/* Datos */}
         <div className="flex justify-center items-center gap-12 py-4">
 
-          {/* Teléfono */}
-          <div className="flex items-center gap-1">
-            <i className="fa-solid fa-phone text-red-600 text-[0.9rem]"></i>
-            <span>969 696 969</span>
-          </div>
-
           {/* Email */}
           <div className="flex items-center gap-1 hidden md:flex">
             <i className="fa-solid fa-envelope text-red-600 text-[0.9rem]"></i>
             <a href="mailto:centrokal29@gmail.com">centrokal29@gmail.com</a>
           </div>
 
+          {/* Teléfono */}
+          <div className="flex items-center gap-1">
+            <i className="fa-solid fa-phone text-red-600 text-[0.9rem]"></i>
+            <span>989 89 78 98</span>
+          </div>
+
           {/* Calle */}
           <div className="flex items-center gap-1 hidden lg:flex">
             <i className="fa-solid fa-location-dot text-red-600 text-[0.9rem]"></i>
-            <span>C/ Ortega, 31, Valencia</span>
+            <span>Calle Valero 31</span>
           </div>
           
         </div>
@@ -108,7 +108,7 @@ export default function Header({user,setUser,router,getProfile}:HeaderProps) {
           (<>
             <button onClick={()=>{setShowPopup(true)}} className="flex items-center gap-1 cursor-pointer">
               <i className="fa-solid fa-user text-red-600 text-[0.9rem]"></i>
-              <span>Mi Cuenta</span>
+              <span>Login</span>
             </button>
           </>)}
         
