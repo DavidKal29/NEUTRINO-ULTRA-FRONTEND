@@ -70,7 +70,7 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                 ×
               </button>
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full items-center">
+              <form autoComplete="off" onSubmit={handleSubmit} className="flex flex-col gap-6 w-full items-center">
                 <h1 className='text-black font-bold text-center text-[30px]'>
                   {popupView === 'login' ? 'Iniciar Sesión' : popupView === 'register' ? 'Crear Cuenta' : 'Olvidé la Contraseña'}
                 </h1>
@@ -127,7 +127,6 @@ export default function AuthPopUp({showPopup,setShowPopup,popupView,setPopupView
                     <input
                       type={visiblePassword ? 'text' : 'password'}
                       name="password"
-                      autoComplete="off"
                       placeholder="Password"
                       onChange={handleChange}
                       className="flex-1 h-full outline-none text-black text-sm placeholder-gray-500"

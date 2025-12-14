@@ -137,7 +137,7 @@ export default function CompletePurchase() {
         </h2>     
       </div>
 
-      <form onSubmit={handleSubmit} className="flex justify-center items-center flex-col md:flex-row md:items-stretch w-full p-4 gap-12 md:px-8 md:py-8 h-full">
+      <form autoComplete="off" onSubmit={handleSubmit} className="flex justify-center items-center flex-col md:flex-row md:items-stretch w-full p-4 gap-12 md:px-8 md:py-8 h-full">
         {/* Formulario datos de envio */}
         <div className="w-full flex flex-col justify-center items-start gap-4 h-full max-w-[600px]">
             <p className="font-bold text-[25px] text-black">DATOS DE ENVÍO</p>

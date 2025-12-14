@@ -100,14 +100,13 @@ export default function ChangePassword() {
             FORMULARIO DE CAMBIO DE CONTRASEÑA
         </h2>
         
-        <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <form autoComplete="off" onSubmit={handleSubmit} className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div
                 className="bg-white rounded border border-gray-300 p-3 drop-shadow-lg w-full md:col-span-2 lg:col-span-1 flex justify-between focus-within:ring-1 focus-within:ring-black focus-within:border-black"
             >
                 <input
                     type={visiblePassword ? 'text' : 'password'}
                     name="new_password"
-                    autoComplete="off"
                     placeholder="New Password"
                     onChange={handleChange}
                     className="outline-none w-full text-black placeholder:text-gray-500"
@@ -128,7 +127,6 @@ export default function ChangePassword() {
                 <input
                     type={visiblePassword2 ? 'text' : 'password'}
                     name="confirm_password"
-                    autoComplete="off"
                     placeholder="Confirm Password"
                     onChange={handleChange}
                     className="outline-none w-full text-black placeholder:text-gray-500"

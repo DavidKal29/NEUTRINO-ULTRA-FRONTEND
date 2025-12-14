@@ -100,7 +100,7 @@ export default function CreateUser() {
         <h2 className="text-[20px] md:text-3xl font-extrabold text-left bg-gradient-to-r from-black via-red-600 to-red-900 bg-clip-text text-transparent mb-6">
           CREAR USUARIO NUEVO
         </h2>
-        <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <form autoComplete="off" onSubmit={handleSubmit} className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <input
             type="text"
@@ -164,7 +164,6 @@ export default function CreateUser() {
             <input
               type={visiblePassword ? 'text' : 'password'}
               name="password"
-              autoComplete="off"
               placeholder="Password"
               onChange={handleChange}
               className="outline-none w-full text-black placeholder:text-gray-500"

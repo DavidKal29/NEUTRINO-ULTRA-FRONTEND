@@ -136,6 +136,7 @@ export default function EditProduct() {
 
             {/* Formulario */}
             <form
+                autoComplete="off"
                 onSubmit={handleSubmit}
                 className="flex flex-col justify-start items-start gap-4 w-full bg-white"
             >
