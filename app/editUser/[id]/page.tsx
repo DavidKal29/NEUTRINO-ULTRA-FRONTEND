@@ -25,14 +25,6 @@ export default function EditUser() {
   const router = useRouter();
   const {id} = useParams()
 
-  const [csrfToken,setCsrfToken] = useState<string | ''>('')
-      
-  const getCsrfToken = ()=>{
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
-      .then(res => res.json())
-      .then(data => setCsrfToken(data.csrfToken))
-  }
-
   const [form,setForm] = useState<EditUserForm>({
     _id: "",
     email: "",
@@ -59,7 +51,7 @@ export default function EditUser() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/editUser/${id}`, {
       method: 'POST',
       credentials: 'include',
-      headers:{'Content-Type':'application/json','CSRF-Token':csrfToken},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify(form)
     })
     .then(res=>res.json())
@@ -140,7 +132,6 @@ export default function EditUser() {
   useEffect(() => {
     getProfile();
     getUserData()
-    getCsrfToken()
   }, []);
 
   return (

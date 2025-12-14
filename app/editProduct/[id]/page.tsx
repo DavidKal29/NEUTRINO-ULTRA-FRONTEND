@@ -12,14 +12,6 @@ export default function EditProduct() {
   const [user, setUser] = useState<User | null>(null);
   const [product,setProduct] = useState<Product | null>(null);
 
-  const [csrfToken,setCsrfToken] = useState<string | ''>('')
-    
-  const getCsrfToken = ()=>{
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
-      .then(res => res.json())
-      .then(data => setCsrfToken(data.csrfToken))
-  }
-
   const categories = ['ordenadores','tablets','moviles','portatiles']
   const brands = ['SAMSUNG','APPLE','OPPO','XIAOMI','LENOVO','ALURIN','PCCOM','ASUS','HP','PC RACING','IBERICAVIP'] 
   
@@ -55,7 +47,7 @@ export default function EditProduct() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/editProduct`, {
       method: 'POST',
       credentials: 'include',
-      headers:{'Content-Type':'application/json','CSRF-Token':csrfToken},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify(body)
     })
     .then(res=>res.json())
@@ -125,9 +117,7 @@ export default function EditProduct() {
 
   useEffect(() => {
     getProfile()
-    getProduct()
-    getCsrfToken()
-    
+    getProduct() 
   }, []);
 
   return (

@@ -13,13 +13,6 @@ export default function Profile() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const [view, setView] = useState<string | 'misDatos'>('misDatos');
-  const [csrfToken,setCsrfToken] = useState<string | ''>('')
-    
-  const getCsrfToken = ()=>{
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf-token`, { credentials: 'include', method: 'GET' })
-      .then(res => res.json())
-      .then(data => setCsrfToken(data.csrfToken))
-  }
 
   const [form,setForm] = useState({
     email:'',
@@ -45,7 +38,7 @@ export default function Profile() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/editProfile`, {
       method: 'POST',
       credentials: 'include',
-      headers:{'Content-Type':'application/json','CSRF-Token':csrfToken},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify(form)
     })
     .then(res=>res.json())
@@ -144,7 +137,6 @@ export default function Profile() {
   useEffect(() => {
     getProfile();
     getMyOrders()
-    getCsrfToken()
   }, []);
 
   return (
